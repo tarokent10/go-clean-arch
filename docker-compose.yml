@@ -1,0 +1,53 @@
+version: "3"
+services:
+  db:
+      image: mysql@sha256:ca4a69d21836099c0aa2b4bb49ee32d2f1e2055576105ea2930206387a9e7291
+      container_name: mysql
+      command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
+      ports:
+        - "3306:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: picture
+        MYSQL_USER: kentaro
+        MYSQL_PASSWORD: kentaro
+        TZ: 'Asia/Tokyo'
+      volumes:
+        - ./mysql/data:/var/lib/mysql
+        # - ./mysql/sql:/docker-entrypoint-initdb.d
+
+  picture-go:
+    build: .
+    tty: true
+    # restart: always
+    environment:
+      APP_DBHOST: db
+      APP_DBPORT: 3306
+    ports: 
+      - "3000:3000"
+    depends_on: ["db","redis"]
+    volumes:
+      - ./app:/go/src/github.com/docker_go_nginx/app
+    command: bash -c "cd app && go run cmd/main.go"
+  redis:
+    image: "redis:6.0.12"
+    ports:
+      - "6379:6379"
+    volumes:
+      - "./redis/data/redis:/data"
+#  nginx:
+#    build: ./nginx
+#    container_name: nginx
+#    restart: always
+#    ports:
+#      - "8081:80"
+#    depends_on: ["picture-go"]
+
+#  ui:
+#    build: ./picture-front
+#    container_name: ui
+#    ports: ["8080:8080"]
+#    depends_on: ["nginx"]
+#    volumes:dock
+#      - ./picture-front:/home/ui
+#    command: "npm run serve"

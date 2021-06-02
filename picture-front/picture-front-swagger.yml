@@ -1,0 +1,165 @@
+openapi: 3.0.0
+info:
+  title: Picture application APIs
+  description: フロントエンドがアクセスするAPI群を定義する.
+  version: 1.0.0
+  license:
+      name: swagger
+      url: https://swagger.io/docs/specification/about/
+
+servers:
+  - url: http://localhost:3000/
+    description: development server
+
+paths:
+  /v1/images/tags:
+    get:
+      tags:
+        - admin
+      summary: get all tags
+      description: get all tag infomeations
+      parameters: []
+      responses:
+        '200':
+          description: a json array of tag infomations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ImageTag'
+                example:
+                  - id: 1
+                    name: corgi
+  /v1/images/:
+    get:
+      tags:
+        - admin
+      summary: get all image datas
+      description: get all image datas
+      parameters: []
+      responses:
+        '200':
+          description: a json array of image data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ImageItem'
+                example:
+                  - id: 1
+                    name: my lovely corgi
+                    data: AGDKS+FOIEDFESAFEILDIE
+                    updateDateTime: 2020/10/03 18:27:30
+                    tagid: 
+                    description: first picture
+    post:
+      tags:
+        - admin
+      summary: create a image data
+      description: create a image data
+      parameters: []
+      requestBody:
+        description: image to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageItem'
+            example:
+              - id: 1
+                name: my lovely corgi
+                data: AGDKS+FOIEDFESAFEILDIE
+                updateDateTime: 2020/10/03 18:27:30
+                tagid: 
+                description: first picture
+      responses:
+        '201':
+          description: CREATED
+  /v1/users/:
+    post:
+      tags:
+        - admin
+      summary: create a user data
+      description: create a user data
+      parameters: []
+      requestBody:
+        description: user to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            example:
+              userID: tanaka
+              name: 田中太郎
+              password: "1234"
+      responses:
+        '201':
+          description: CREATED
+  /v1/auth/login/:
+    post:
+      tags:
+        - admin
+      summary: login
+      description: login
+      parameters: []
+      requestBody:
+        description: user to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            example:
+              userID: tanaka
+              password: "1234"
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Login FOIEDFESAFEILDIE
+components:
+  schemas: 
+    ImageTag:
+      type: object
+      required:
+        - name
+      properties:
+          id:
+            type: integer
+            format: int32
+          name:
+            type: string
+    ImageItem:
+      type: object
+      properties:
+          id:
+            type: integer
+            format: int32
+          name:
+            type: string
+          data:
+            type: string
+            format: byte # base64 encorded
+          updateDateTime:
+            type: string
+            format: date-time
+          tagId:
+            type: integer
+            format: int32
+          description:
+            type: string
+    User:
+      type: object
+      properties:
+          userID:
+            type: string
+          name:
+            type: string
+          password:
+            type: string
+tags:
+  - name: admin
+    description: apis for admin user
+externalDocs:
+    description: Swagger(openapi)記法の参考記事
+    url: https://qiita.com/teinen_qiita/items/e440ca7b1b52ec918f1b#tags

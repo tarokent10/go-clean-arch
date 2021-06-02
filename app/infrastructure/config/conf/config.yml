@@ -1,0 +1,8 @@
+
+ LOGLEVEL : 0 # 0:degug, 1:info, 2:warn, 3:error
+ LOGFILE :
+ DBHOST: localhost
+ DBPORT: 3306
+ DBUSER: kentaro
+ DBPASSWORD: kentaro
+ DATABASE: picture
