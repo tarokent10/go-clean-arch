@@ -15,39 +15,31 @@ services:
       volumes:
         - ./mysql/data:/var/lib/mysql
         # - ./mysql/sql:/docker-entrypoint-initdb.d
-
-  picture-go:
-    build: .
-    tty: true
-    # restart: always
-    environment:
-      APP_DBHOST: db
-      APP_DBPORT: 3306
-    ports: 
-      - "3000:3000"
-    depends_on: ["db","redis"]
-    volumes:
-      - ./app:/go/src/github.com/docker_go_nginx/app
-    command: bash -c "cd app && go run cmd/main.go"
   redis:
     image: "redis:6.0.12"
     ports:
       - "6379:6379"
     volumes:
       - "./redis/data/redis:/data"
-#  nginx:
-#    build: ./nginx
-#    container_name: nginx
-#    restart: always
-#    ports:
-#      - "8081:80"
-#    depends_on: ["picture-go"]
+  picture-go:
+    image: golang:latest
+    tty: true
+    # restart: always
+    environment:
+      APP_DBHOST: db
+      APP_DBPORT: 3306
+    ports: 
+      - "8080":3000"
+    depends_on: ["db","redis"]
+    volumes:
+      - ./app:/home/app
+    working_dir: /home
+    command: bash -c "cd app && go run cmd/main.go"
 
 #  ui:
 #    build: ./picture-front
 #    container_name: ui
 #    ports: ["8080:8080"]
-#    depends_on: ["nginx"]
-#    volumes:dock
+#    volumes:
 #      - ./picture-front:/home/ui
 #    command: "npm run serve"
