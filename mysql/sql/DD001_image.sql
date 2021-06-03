@@ -1,21 +1,13 @@
-use picture;
--- ImageItem(イメージタグ)
-CREATE TABLE image_tag (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    name VARCHAR(10) NOT NULL,
-    created_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    updated_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    PRIMARY KEY (id)
-);
+use mydb;
 
--- ImageItem(イメージデータ)
+-- Employee(イメージデータ)
 CREATE TABLE image_item (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    name VARCHAR(20) NOT NULL,
-    data BLOB NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    picture BLOB NOT NULL,
     update_date_time TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    tag_id INT,
-    description VARCHAR(100),
+    department VARCHAR(50),
+    remarks VARCHAR(200),
     created_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     updated_at TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     PRIMARY KEY (id)

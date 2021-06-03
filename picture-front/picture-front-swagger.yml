@@ -30,7 +30,7 @@ paths:
                   $ref: '#/components/schemas/Employee'
                 example:
                    - name: taro tanaka
-                     data: AGDKS+FOIEDFESAFEILDIE
+                     picture: AGDKS+FOIEDFESAFEILDIE
                      updateDateTime: 2020/10/03 18:27:30
                      department: development
                      remarks: ""
@@ -48,7 +48,7 @@ paths:
               $ref: '#/components/schemas/Employee'
             example:
               - name: taro tanaka
-                data: AGDKS+FOIEDFESAFEILDIE
+                picture: AGDKS+FOIEDFESAFEILDIE
                 updateDateTime: 2020/10/03 18:27:30
                 department: development
                 remarks: ""

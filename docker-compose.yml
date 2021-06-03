@@ -7,9 +7,9 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: picture
-      MYSQL_USER: kentaro
-      MYSQL_PASSWORD: kentaro
+      MYSQL_DATABASE: mydb 
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
       TZ: 'Asia/Tokyo'
     volumes:
       - ./mysql/data:/var/lib/mysql
