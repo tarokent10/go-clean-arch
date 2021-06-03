@@ -13,75 +13,62 @@ import "testing"
 // Separating the tests thusly grants avoidance of Postgres deadlocks.
 func TestParent(t *testing.T) {
 	t.Run("ImageItems", testImageItems)
-	t.Run("ImageTags", testImageTags)
 	t.Run("Users", testUsers)
 }
 
 func TestDelete(t *testing.T) {
 	t.Run("ImageItems", testImageItemsDelete)
-	t.Run("ImageTags", testImageTagsDelete)
 	t.Run("Users", testUsersDelete)
 }
 
 func TestQueryDeleteAll(t *testing.T) {
 	t.Run("ImageItems", testImageItemsQueryDeleteAll)
-	t.Run("ImageTags", testImageTagsQueryDeleteAll)
 	t.Run("Users", testUsersQueryDeleteAll)
 }
 
 func TestSliceDeleteAll(t *testing.T) {
 	t.Run("ImageItems", testImageItemsSliceDeleteAll)
-	t.Run("ImageTags", testImageTagsSliceDeleteAll)
 	t.Run("Users", testUsersSliceDeleteAll)
 }
 
 func TestExists(t *testing.T) {
 	t.Run("ImageItems", testImageItemsExists)
-	t.Run("ImageTags", testImageTagsExists)
 	t.Run("Users", testUsersExists)
 }
 
 func TestFind(t *testing.T) {
 	t.Run("ImageItems", testImageItemsFind)
-	t.Run("ImageTags", testImageTagsFind)
 	t.Run("Users", testUsersFind)
 }
 
 func TestBind(t *testing.T) {
 	t.Run("ImageItems", testImageItemsBind)
-	t.Run("ImageTags", testImageTagsBind)
 	t.Run("Users", testUsersBind)
 }
 
 func TestOne(t *testing.T) {
 	t.Run("ImageItems", testImageItemsOne)
-	t.Run("ImageTags", testImageTagsOne)
 	t.Run("Users", testUsersOne)
 }
 
 func TestAll(t *testing.T) {
 	t.Run("ImageItems", testImageItemsAll)
-	t.Run("ImageTags", testImageTagsAll)
 	t.Run("Users", testUsersAll)
 }
 
 func TestCount(t *testing.T) {
 	t.Run("ImageItems", testImageItemsCount)
-	t.Run("ImageTags", testImageTagsCount)
 	t.Run("Users", testUsersCount)
 }
 
 func TestHooks(t *testing.T) {
 	t.Run("ImageItems", testImageItemsHooks)
-	t.Run("ImageTags", testImageTagsHooks)
 	t.Run("Users", testUsersHooks)
 }
 
 func TestInsert(t *testing.T) {
 	t.Run("ImageItems", testImageItemsInsert)
 	t.Run("ImageItems", testImageItemsInsertWhitelist)
-	t.Run("ImageTags", testImageTagsInsert)
-	t.Run("ImageTags", testImageTagsInsertWhitelist)
 	t.Run("Users", testUsersInsert)
 	t.Run("Users", testUsersInsertWhitelist)
 }
@@ -128,30 +115,25 @@ func TestToManyRemove(t *testing.T) {}
 
 func TestReload(t *testing.T) {
 	t.Run("ImageItems", testImageItemsReload)
-	t.Run("ImageTags", testImageTagsReload)
 	t.Run("Users", testUsersReload)
 }
 
 func TestReloadAll(t *testing.T) {
 	t.Run("ImageItems", testImageItemsReloadAll)
-	t.Run("ImageTags", testImageTagsReloadAll)
 	t.Run("Users", testUsersReloadAll)
 }
 
 func TestSelect(t *testing.T) {
 	t.Run("ImageItems", testImageItemsSelect)
-	t.Run("ImageTags", testImageTagsSelect)
 	t.Run("Users", testUsersSelect)
 }
 
 func TestUpdate(t *testing.T) {
 	t.Run("ImageItems", testImageItemsUpdate)
-	t.Run("ImageTags", testImageTagsUpdate)
 	t.Run("Users", testUsersUpdate)
 }
 
 func TestSliceUpdateAll(t *testing.T) {
 	t.Run("ImageItems", testImageItemsSliceUpdateAll)
-	t.Run("ImageTags", testImageTagsSliceUpdateAll)
 	t.Run("Users", testUsersSliceUpdateAll)
 }

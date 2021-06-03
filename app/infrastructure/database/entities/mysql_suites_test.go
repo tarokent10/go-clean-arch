@@ -8,7 +8,5 @@ import "testing"
 func TestUpsert(t *testing.T) {
 	t.Run("ImageItems", testImageItemsUpsert)
 
-	t.Run("ImageTags", testImageTagsUpsert)
-
 	t.Run("Users", testUsersUpsert)
 }

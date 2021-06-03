@@ -568,7 +568,7 @@ func testImageItemsSelect(t *testing.T) {
 }
 
 var (
-	imageItemDBTypes = map[string]string{`ID`: `int`, `Name`: `varchar`, `Data`: `blob`, `UpdateDateTime`: `timestamp`, `TagID`: `int`, `Description`: `varchar`, `CreatedAt`: `timestamp`, `UpdatedAt`: `timestamp`}
+	imageItemDBTypes = map[string]string{`ID`: `int`, `Name`: `varchar`, `Picture`: `blob`, `UpdateDateTime`: `timestamp`, `Department`: `varchar`, `Remarks`: `varchar`, `CreatedAt`: `timestamp`, `UpdatedAt`: `timestamp`}
 	_                = bytes.MinRead
 )
 

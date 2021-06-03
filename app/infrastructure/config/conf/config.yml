@@ -3,6 +3,6 @@
  LOGFILE :
  DBHOST: localhost
  DBPORT: 3306
- DBUSER: kentaro
- DBPASSWORD: kentaro
- DATABASE: picture
+ DBUSER: test
+ DBPASSWORD: test
+ DATABASE: mydb

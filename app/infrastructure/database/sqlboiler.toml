@@ -2,10 +2,10 @@ output="entities"
 pkgname="entities"
 wipe=true
 [mysql]
-  dbname = "picture"
+  dbname = "mydb"
   host   = "localhost"
   port   = 3306
-  user   = "kentaro"
-  pass   = "kentaro"
+  user   = "test"
+  pass   = "test"
   sslmode= "false"
   blacklist = []

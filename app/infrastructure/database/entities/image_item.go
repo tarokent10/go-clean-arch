@@ -26,10 +26,10 @@ import (
 type ImageItem struct {
 	ID             uint        `boil:"id" json:"id" toml:"id" yaml:"id"`
 	Name           string      `boil:"name" json:"name" toml:"name" yaml:"name"`
-	Data           []byte      `boil:"data" json:"data" toml:"data" yaml:"data"`
+	Picture        []byte      `boil:"picture" json:"picture" toml:"picture" yaml:"picture"`
 	UpdateDateTime time.Time   `boil:"update_date_time" json:"update_date_time" toml:"update_date_time" yaml:"update_date_time"`
-	TagID          null.Int    `boil:"tag_id" json:"tag_id,omitempty" toml:"tag_id" yaml:"tag_id,omitempty"`
-	Description    null.String `boil:"description" json:"description,omitempty" toml:"description" yaml:"description,omitempty"`
+	Department     null.String `boil:"department" json:"department,omitempty" toml:"department" yaml:"department,omitempty"`
+	Remarks        null.String `boil:"remarks" json:"remarks,omitempty" toml:"remarks" yaml:"remarks,omitempty"`
 	CreatedAt      time.Time   `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
 	UpdatedAt      time.Time   `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
 
@@ -40,19 +40,19 @@ type ImageItem struct {
 var ImageItemColumns = struct {
 	ID             string
 	Name           string
-	Data           string
+	Picture        string
 	UpdateDateTime string
-	TagID          string
-	Description    string
+	Department     string
+	Remarks        string
 	CreatedAt      string
 	UpdatedAt      string
 }{
 	ID:             "id",
 	Name:           "name",
-	Data:           "data",
+	Picture:        "picture",
 	UpdateDateTime: "update_date_time",
-	TagID:          "tag_id",
-	Description:    "description",
+	Department:     "department",
+	Remarks:        "remarks",
 	CreatedAt:      "created_at",
 	UpdatedAt:      "updated_at",
 }
@@ -135,29 +135,6 @@ func (w whereHelpertime_Time) GTE(x time.Time) qm.QueryMod {
 	return qmhelper.Where(w.field, qmhelper.GTE, x)
 }
 
-type whereHelpernull_Int struct{ field string }
-
-func (w whereHelpernull_Int) EQ(x null.Int) qm.QueryMod {
-	return qmhelper.WhereNullEQ(w.field, false, x)
-}
-func (w whereHelpernull_Int) NEQ(x null.Int) qm.QueryMod {
-	return qmhelper.WhereNullEQ(w.field, true, x)
-}
-func (w whereHelpernull_Int) IsNull() qm.QueryMod    { return qmhelper.WhereIsNull(w.field) }
-func (w whereHelpernull_Int) IsNotNull() qm.QueryMod { return qmhelper.WhereIsNotNull(w.field) }
-func (w whereHelpernull_Int) LT(x null.Int) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.LT, x)
-}
-func (w whereHelpernull_Int) LTE(x null.Int) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.LTE, x)
-}
-func (w whereHelpernull_Int) GT(x null.Int) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.GT, x)
-}
-func (w whereHelpernull_Int) GTE(x null.Int) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.GTE, x)
-}
-
 type whereHelpernull_String struct{ field string }
 
 func (w whereHelpernull_String) EQ(x null.String) qm.QueryMod {
@@ -184,19 +161,19 @@ func (w whereHelpernull_String) GTE(x null.String) qm.QueryMod {
 var ImageItemWhere = struct {
 	ID             whereHelperuint
 	Name           whereHelperstring
-	Data           whereHelper__byte
+	Picture        whereHelper__byte
 	UpdateDateTime whereHelpertime_Time
-	TagID          whereHelpernull_Int
-	Description    whereHelpernull_String
+	Department     whereHelpernull_String
+	Remarks        whereHelpernull_String
 	CreatedAt      whereHelpertime_Time
 	UpdatedAt      whereHelpertime_Time
 }{
 	ID:             whereHelperuint{field: "`image_item`.`id`"},
 	Name:           whereHelperstring{field: "`image_item`.`name`"},
-	Data:           whereHelper__byte{field: "`image_item`.`data`"},
+	Picture:        whereHelper__byte{field: "`image_item`.`picture`"},
 	UpdateDateTime: whereHelpertime_Time{field: "`image_item`.`update_date_time`"},
-	TagID:          whereHelpernull_Int{field: "`image_item`.`tag_id`"},
-	Description:    whereHelpernull_String{field: "`image_item`.`description`"},
+	Department:     whereHelpernull_String{field: "`image_item`.`department`"},
+	Remarks:        whereHelpernull_String{field: "`image_item`.`remarks`"},
 	CreatedAt:      whereHelpertime_Time{field: "`image_item`.`created_at`"},
 	UpdatedAt:      whereHelpertime_Time{field: "`image_item`.`updated_at`"},
 }
@@ -218,8 +195,8 @@ func (*imageItemR) NewStruct() *imageItemR {
 type imageItemL struct{}
 
 var (
-	imageItemAllColumns            = []string{"id", "name", "data", "update_date_time", "tag_id", "description", "created_at", "updated_at"}
-	imageItemColumnsWithoutDefault = []string{"name", "data", "tag_id", "description"}
+	imageItemAllColumns            = []string{"id", "name", "picture", "update_date_time", "department", "remarks", "created_at", "updated_at"}
+	imageItemColumnsWithoutDefault = []string{"name", "picture", "department", "remarks"}
 	imageItemColumnsWithDefault    = []string{"id", "update_date_time", "created_at", "updated_at"}
 	imageItemPrimaryKeyColumns     = []string{"id"}
 )

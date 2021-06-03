@@ -5,10 +5,8 @@ package entities
 
 var TableNames = struct {
 	ImageItem string
-	ImageTag  string
 	User      string
 }{
 	ImageItem: "image_item",
-	ImageTag:  "image_tag",
 	User:      "user",
 }
