@@ -25,13 +25,9 @@ func Run(c *dig.Container) {
 	r.Use(sessions.Sessions("mysession", store))
 	r.Use(session.AuthRequired)
 	if err := c.Invoke(func(
-		imageController controller.ImageContorollerIF,
-		userController controller.UserContorollerIF,
+		authController controller.AuthContorollerIF,
 	) {
-		r.GET("/v1/images/", imageController.GetAll)
-		r.POST("/v1/users/", userController.Create)
-		r.POST("/v1/auth/login/", userController.Login)
-		r.POST("/v1/images/", imageController.Create)
+		r.POST("/v1/auth/login/", authController.Login)
 		r.GET("/v1/test/", func(ctx *gin.Context) {
 			s := sessions.Default(ctx)
 			fmt.Printf("get: %v¥n", s.Get("key"))

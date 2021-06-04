@@ -26,16 +26,11 @@ func InitDIContainer(conn connector.DBConnector) (*dig.Container, error) {
 	errors = appendIfExists(c.Provide(func() connector.DBConnector {
 		return conn
 	}), errors)
-	errors = appendIfExists(c.Provide(gateway.NewImageRepository), errors)
-	errors = appendIfExists(c.Provide(gateway.NewImagetagRepository), errors)
 	errors = appendIfExists(c.Provide(gateway.NewUserRepository), errors)
 	// usecase
-	errors = appendIfExists(c.Provide(usecase.NewImageUsecase), errors)
-	errors = appendIfExists(c.Provide(usecase.NewImagetagUsecase), errors)
-	errors = appendIfExists(c.Provide(usecase.NewUserUsecase), errors)
+	errors = appendIfExists(c.Provide(usecase.NewAuthUsecase), errors)
 	// contoroller
-	errors = appendIfExists(c.Provide(controller.NewImageContoroller), errors)
-	errors = appendIfExists(c.Provide(controller.NewUserContoroller), errors)
+	errors = appendIfExists(c.Provide(controller.NewAuthContoroller), errors)
 
 	return c, mergeError(errors)
 }

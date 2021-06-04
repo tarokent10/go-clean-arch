@@ -1,10 +1,8 @@
 package usecase
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
-	"picture-go-app/domain/models"
 	"picture-go-app/domain/repository"
 	"picture-go-app/infrastructure/log"
 	"picture-go-app/infrastructure/session"
@@ -13,29 +11,27 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type UserUsecaseIF interface {
+type AuthUsecaseIF interface {
 	Login(ctx *gin.Context, userID, password string) error
-	Insert(ctx context.Context, m *models.User) error
 }
 
-// UserUsecase is image usecase
-type UserUsecase struct {
+// AuthUsecase is image usecase
+type AuthUsecase struct {
 	rep repository.UserRepository
 }
-type UserContainer struct {
+type AuthContainer struct {
 	UserID   string `json:"userID"`
-	Name     string `json:"name"`
 	Password string `json:"password"`
 }
 
-// NewUserUsecase is factory method
-func NewUserUsecase(r repository.UserRepository) *UserUsecase {
-	return &UserUsecase{
+// NewAuthUsecase is factory method
+func NewAuthUsecase(r repository.UserRepository) *AuthUsecase {
+	return &AuthUsecase{
 		rep: r,
 	}
 }
 
-func (uc UserUsecase) Login(ctx *gin.Context, userID, password string) error {
+func (uc AuthUsecase) Login(ctx *gin.Context, userID, password string) error {
 	// TODO ユーザユースケースにログインがあるのはおかしいのでどっかに移す
 	m, err := uc.rep.FindWithContext(ctx, userID)
 	if err != nil {
@@ -47,16 +43,6 @@ func (uc UserUsecase) Login(ctx *gin.Context, userID, password string) error {
 	}
 	logined(ctx)
 	return nil
-}
-
-// Insert regist data
-func (uc UserUsecase) Insert(ctx context.Context, u *UserContainer) error {
-	m := &models.User{
-		UserID:   u.UserID,
-		Name:     u.Name,
-		Password: u.Password,
-	}
-	return uc.rep.InsertWithContext(ctx, m)
 }
 
 func logined(c *gin.Context) {

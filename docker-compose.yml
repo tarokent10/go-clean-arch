@@ -20,7 +20,7 @@ services:
       - "6379:6379"
     volumes:
       - "./redis/data/redis:/data"
-  picture-go:
+  go-app:
     image: golang:latest
     tty: true
     # restart: always
