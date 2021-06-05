@@ -12,63 +12,63 @@ import "testing"
 // It does NOT run each operation group in parallel.
 // Separating the tests thusly grants avoidance of Postgres deadlocks.
 func TestParent(t *testing.T) {
-	t.Run("ImageItems", testImageItems)
+	t.Run("Employees", testEmployees)
 	t.Run("Users", testUsers)
 }
 
 func TestDelete(t *testing.T) {
-	t.Run("ImageItems", testImageItemsDelete)
+	t.Run("Employees", testEmployeesDelete)
 	t.Run("Users", testUsersDelete)
 }
 
 func TestQueryDeleteAll(t *testing.T) {
-	t.Run("ImageItems", testImageItemsQueryDeleteAll)
+	t.Run("Employees", testEmployeesQueryDeleteAll)
 	t.Run("Users", testUsersQueryDeleteAll)
 }
 
 func TestSliceDeleteAll(t *testing.T) {
-	t.Run("ImageItems", testImageItemsSliceDeleteAll)
+	t.Run("Employees", testEmployeesSliceDeleteAll)
 	t.Run("Users", testUsersSliceDeleteAll)
 }
 
 func TestExists(t *testing.T) {
-	t.Run("ImageItems", testImageItemsExists)
+	t.Run("Employees", testEmployeesExists)
 	t.Run("Users", testUsersExists)
 }
 
 func TestFind(t *testing.T) {
-	t.Run("ImageItems", testImageItemsFind)
+	t.Run("Employees", testEmployeesFind)
 	t.Run("Users", testUsersFind)
 }
 
 func TestBind(t *testing.T) {
-	t.Run("ImageItems", testImageItemsBind)
+	t.Run("Employees", testEmployeesBind)
 	t.Run("Users", testUsersBind)
 }
 
 func TestOne(t *testing.T) {
-	t.Run("ImageItems", testImageItemsOne)
+	t.Run("Employees", testEmployeesOne)
 	t.Run("Users", testUsersOne)
 }
 
 func TestAll(t *testing.T) {
-	t.Run("ImageItems", testImageItemsAll)
+	t.Run("Employees", testEmployeesAll)
 	t.Run("Users", testUsersAll)
 }
 
 func TestCount(t *testing.T) {
-	t.Run("ImageItems", testImageItemsCount)
+	t.Run("Employees", testEmployeesCount)
 	t.Run("Users", testUsersCount)
 }
 
 func TestHooks(t *testing.T) {
-	t.Run("ImageItems", testImageItemsHooks)
+	t.Run("Employees", testEmployeesHooks)
 	t.Run("Users", testUsersHooks)
 }
 
 func TestInsert(t *testing.T) {
-	t.Run("ImageItems", testImageItemsInsert)
-	t.Run("ImageItems", testImageItemsInsertWhitelist)
+	t.Run("Employees", testEmployeesInsert)
+	t.Run("Employees", testEmployeesInsertWhitelist)
 	t.Run("Users", testUsersInsert)
 	t.Run("Users", testUsersInsertWhitelist)
 }
@@ -114,26 +114,26 @@ func TestToManySet(t *testing.T) {}
 func TestToManyRemove(t *testing.T) {}
 
 func TestReload(t *testing.T) {
-	t.Run("ImageItems", testImageItemsReload)
+	t.Run("Employees", testEmployeesReload)
 	t.Run("Users", testUsersReload)
 }
 
 func TestReloadAll(t *testing.T) {
-	t.Run("ImageItems", testImageItemsReloadAll)
+	t.Run("Employees", testEmployeesReloadAll)
 	t.Run("Users", testUsersReloadAll)
 }
 
 func TestSelect(t *testing.T) {
-	t.Run("ImageItems", testImageItemsSelect)
+	t.Run("Employees", testEmployeesSelect)
 	t.Run("Users", testUsersSelect)
 }
 
 func TestUpdate(t *testing.T) {
-	t.Run("ImageItems", testImageItemsUpdate)
+	t.Run("Employees", testEmployeesUpdate)
 	t.Run("Users", testUsersUpdate)
 }
 
 func TestSliceUpdateAll(t *testing.T) {
-	t.Run("ImageItems", testImageItemsSliceUpdateAll)
+	t.Run("Employees", testEmployeesSliceUpdateAll)
 	t.Run("Users", testUsersSliceUpdateAll)
 }

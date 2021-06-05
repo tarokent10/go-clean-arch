@@ -6,7 +6,7 @@ package entities
 import "testing"
 
 func TestUpsert(t *testing.T) {
-	t.Run("ImageItems", testImageItemsUpsert)
+	t.Run("Employees", testEmployeesUpsert)
 
 	t.Run("Users", testUsersUpsert)
 }

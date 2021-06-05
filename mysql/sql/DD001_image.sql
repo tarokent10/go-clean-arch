@@ -1,7 +1,7 @@
 use mydb;
 
 -- Employee(イメージデータ)
-CREATE TABLE image_item (
+CREATE TABLE employee (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     picture BLOB NOT NULL,

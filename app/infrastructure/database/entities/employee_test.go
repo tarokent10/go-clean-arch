@@ -21,24 +21,24 @@ var (
 	_ = queries.Equal
 )
 
-func testImageItems(t *testing.T) {
+func testEmployees(t *testing.T) {
 	t.Parallel()
 
-	query := ImageItems()
+	query := Employees()
 
 	if query.Query == nil {
 		t.Error("expected a query, got nothing")
 	}
 }
 
-func testImageItemsDelete(t *testing.T) {
+func testEmployeesDelete(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &ImageItem{}
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := &Employee{}
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -54,7 +54,7 @@ func testImageItemsDelete(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := ImageItems().Count(ctx, tx)
+	count, err := Employees().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -64,14 +64,14 @@ func testImageItemsDelete(t *testing.T) {
 	}
 }
 
-func testImageItemsQueryDeleteAll(t *testing.T) {
+func testEmployeesQueryDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &ImageItem{}
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := &Employee{}
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -81,13 +81,13 @@ func testImageItemsQueryDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	if rowsAff, err := ImageItems().DeleteAll(ctx, tx); err != nil {
+	if rowsAff, err := Employees().DeleteAll(ctx, tx); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := ImageItems().Count(ctx, tx)
+	count, err := Employees().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -97,14 +97,14 @@ func testImageItemsQueryDeleteAll(t *testing.T) {
 	}
 }
 
-func testImageItemsSliceDeleteAll(t *testing.T) {
+func testEmployeesSliceDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &ImageItem{}
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := &Employee{}
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -114,7 +114,7 @@ func testImageItemsSliceDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := ImageItemSlice{o}
+	slice := EmployeeSlice{o}
 
 	if rowsAff, err := slice.DeleteAll(ctx, tx); err != nil {
 		t.Error(err)
@@ -122,7 +122,7 @@ func testImageItemsSliceDeleteAll(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := ImageItems().Count(ctx, tx)
+	count, err := Employees().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -132,14 +132,14 @@ func testImageItemsSliceDeleteAll(t *testing.T) {
 	}
 }
 
-func testImageItemsExists(t *testing.T) {
+func testEmployeesExists(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &ImageItem{}
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := &Employee{}
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -149,23 +149,23 @@ func testImageItemsExists(t *testing.T) {
 		t.Error(err)
 	}
 
-	e, err := ImageItemExists(ctx, tx, o.ID)
+	e, err := EmployeeExists(ctx, tx, o.ID)
 	if err != nil {
-		t.Errorf("Unable to check if ImageItem exists: %s", err)
+		t.Errorf("Unable to check if Employee exists: %s", err)
 	}
 	if !e {
-		t.Errorf("Expected ImageItemExists to return true, but got false.")
+		t.Errorf("Expected EmployeeExists to return true, but got false.")
 	}
 }
 
-func testImageItemsFind(t *testing.T) {
+func testEmployeesFind(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &ImageItem{}
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := &Employee{}
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -175,24 +175,24 @@ func testImageItemsFind(t *testing.T) {
 		t.Error(err)
 	}
 
-	imageItemFound, err := FindImageItem(ctx, tx, o.ID)
+	employeeFound, err := FindEmployee(ctx, tx, o.ID)
 	if err != nil {
 		t.Error(err)
 	}
 
-	if imageItemFound == nil {
+	if employeeFound == nil {
 		t.Error("want a record, got nil")
 	}
 }
 
-func testImageItemsBind(t *testing.T) {
+func testEmployeesBind(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &ImageItem{}
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := &Employee{}
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -202,19 +202,19 @@ func testImageItemsBind(t *testing.T) {
 		t.Error(err)
 	}
 
-	if err = ImageItems().Bind(ctx, tx, o); err != nil {
+	if err = Employees().Bind(ctx, tx, o); err != nil {
 		t.Error(err)
 	}
 }
 
-func testImageItemsOne(t *testing.T) {
+func testEmployeesOne(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &ImageItem{}
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := &Employee{}
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -224,38 +224,38 @@ func testImageItemsOne(t *testing.T) {
 		t.Error(err)
 	}
 
-	if x, err := ImageItems().One(ctx, tx); err != nil {
+	if x, err := Employees().One(ctx, tx); err != nil {
 		t.Error(err)
 	} else if x == nil {
 		t.Error("expected to get a non nil record")
 	}
 }
 
-func testImageItemsAll(t *testing.T) {
+func testEmployeesAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	imageItemOne := &ImageItem{}
-	imageItemTwo := &ImageItem{}
-	if err = randomize.Struct(seed, imageItemOne, imageItemDBTypes, false, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	employeeOne := &Employee{}
+	employeeTwo := &Employee{}
+	if err = randomize.Struct(seed, employeeOne, employeeDBTypes, false, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
-	if err = randomize.Struct(seed, imageItemTwo, imageItemDBTypes, false, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	if err = randomize.Struct(seed, employeeTwo, employeeDBTypes, false, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = imageItemOne.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = employeeOne.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
-	if err = imageItemTwo.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = employeeTwo.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
 
-	slice, err := ImageItems().All(ctx, tx)
+	slice, err := Employees().All(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -265,31 +265,31 @@ func testImageItemsAll(t *testing.T) {
 	}
 }
 
-func testImageItemsCount(t *testing.T) {
+func testEmployeesCount(t *testing.T) {
 	t.Parallel()
 
 	var err error
 	seed := randomize.NewSeed()
-	imageItemOne := &ImageItem{}
-	imageItemTwo := &ImageItem{}
-	if err = randomize.Struct(seed, imageItemOne, imageItemDBTypes, false, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	employeeOne := &Employee{}
+	employeeTwo := &Employee{}
+	if err = randomize.Struct(seed, employeeOne, employeeDBTypes, false, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
-	if err = randomize.Struct(seed, imageItemTwo, imageItemDBTypes, false, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	if err = randomize.Struct(seed, employeeTwo, employeeDBTypes, false, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = imageItemOne.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = employeeOne.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
-	if err = imageItemTwo.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = employeeTwo.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
 
-	count, err := ImageItems().Count(ctx, tx)
+	count, err := Employees().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -299,155 +299,155 @@ func testImageItemsCount(t *testing.T) {
 	}
 }
 
-func imageItemBeforeInsertHook(ctx context.Context, e boil.ContextExecutor, o *ImageItem) error {
-	*o = ImageItem{}
+func employeeBeforeInsertHook(ctx context.Context, e boil.ContextExecutor, o *Employee) error {
+	*o = Employee{}
 	return nil
 }
 
-func imageItemAfterInsertHook(ctx context.Context, e boil.ContextExecutor, o *ImageItem) error {
-	*o = ImageItem{}
+func employeeAfterInsertHook(ctx context.Context, e boil.ContextExecutor, o *Employee) error {
+	*o = Employee{}
 	return nil
 }
 
-func imageItemAfterSelectHook(ctx context.Context, e boil.ContextExecutor, o *ImageItem) error {
-	*o = ImageItem{}
+func employeeAfterSelectHook(ctx context.Context, e boil.ContextExecutor, o *Employee) error {
+	*o = Employee{}
 	return nil
 }
 
-func imageItemBeforeUpdateHook(ctx context.Context, e boil.ContextExecutor, o *ImageItem) error {
-	*o = ImageItem{}
+func employeeBeforeUpdateHook(ctx context.Context, e boil.ContextExecutor, o *Employee) error {
+	*o = Employee{}
 	return nil
 }
 
-func imageItemAfterUpdateHook(ctx context.Context, e boil.ContextExecutor, o *ImageItem) error {
-	*o = ImageItem{}
+func employeeAfterUpdateHook(ctx context.Context, e boil.ContextExecutor, o *Employee) error {
+	*o = Employee{}
 	return nil
 }
 
-func imageItemBeforeDeleteHook(ctx context.Context, e boil.ContextExecutor, o *ImageItem) error {
-	*o = ImageItem{}
+func employeeBeforeDeleteHook(ctx context.Context, e boil.ContextExecutor, o *Employee) error {
+	*o = Employee{}
 	return nil
 }
 
-func imageItemAfterDeleteHook(ctx context.Context, e boil.ContextExecutor, o *ImageItem) error {
-	*o = ImageItem{}
+func employeeAfterDeleteHook(ctx context.Context, e boil.ContextExecutor, o *Employee) error {
+	*o = Employee{}
 	return nil
 }
 
-func imageItemBeforeUpsertHook(ctx context.Context, e boil.ContextExecutor, o *ImageItem) error {
-	*o = ImageItem{}
+func employeeBeforeUpsertHook(ctx context.Context, e boil.ContextExecutor, o *Employee) error {
+	*o = Employee{}
 	return nil
 }
 
-func imageItemAfterUpsertHook(ctx context.Context, e boil.ContextExecutor, o *ImageItem) error {
-	*o = ImageItem{}
+func employeeAfterUpsertHook(ctx context.Context, e boil.ContextExecutor, o *Employee) error {
+	*o = Employee{}
 	return nil
 }
 
-func testImageItemsHooks(t *testing.T) {
+func testEmployeesHooks(t *testing.T) {
 	t.Parallel()
 
 	var err error
 
 	ctx := context.Background()
-	empty := &ImageItem{}
-	o := &ImageItem{}
+	empty := &Employee{}
+	o := &Employee{}
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, o, imageItemDBTypes, false); err != nil {
-		t.Errorf("Unable to randomize ImageItem object: %s", err)
+	if err = randomize.Struct(seed, o, employeeDBTypes, false); err != nil {
+		t.Errorf("Unable to randomize Employee object: %s", err)
 	}
 
-	AddImageItemHook(boil.BeforeInsertHook, imageItemBeforeInsertHook)
+	AddEmployeeHook(boil.BeforeInsertHook, employeeBeforeInsertHook)
 	if err = o.doBeforeInsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeInsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeInsertHook function to empty object, but got: %#v", o)
 	}
-	imageItemBeforeInsertHooks = []ImageItemHook{}
+	employeeBeforeInsertHooks = []EmployeeHook{}
 
-	AddImageItemHook(boil.AfterInsertHook, imageItemAfterInsertHook)
+	AddEmployeeHook(boil.AfterInsertHook, employeeAfterInsertHook)
 	if err = o.doAfterInsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterInsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterInsertHook function to empty object, but got: %#v", o)
 	}
-	imageItemAfterInsertHooks = []ImageItemHook{}
+	employeeAfterInsertHooks = []EmployeeHook{}
 
-	AddImageItemHook(boil.AfterSelectHook, imageItemAfterSelectHook)
+	AddEmployeeHook(boil.AfterSelectHook, employeeAfterSelectHook)
 	if err = o.doAfterSelectHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterSelectHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterSelectHook function to empty object, but got: %#v", o)
 	}
-	imageItemAfterSelectHooks = []ImageItemHook{}
+	employeeAfterSelectHooks = []EmployeeHook{}
 
-	AddImageItemHook(boil.BeforeUpdateHook, imageItemBeforeUpdateHook)
+	AddEmployeeHook(boil.BeforeUpdateHook, employeeBeforeUpdateHook)
 	if err = o.doBeforeUpdateHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeUpdateHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeUpdateHook function to empty object, but got: %#v", o)
 	}
-	imageItemBeforeUpdateHooks = []ImageItemHook{}
+	employeeBeforeUpdateHooks = []EmployeeHook{}
 
-	AddImageItemHook(boil.AfterUpdateHook, imageItemAfterUpdateHook)
+	AddEmployeeHook(boil.AfterUpdateHook, employeeAfterUpdateHook)
 	if err = o.doAfterUpdateHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterUpdateHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterUpdateHook function to empty object, but got: %#v", o)
 	}
-	imageItemAfterUpdateHooks = []ImageItemHook{}
+	employeeAfterUpdateHooks = []EmployeeHook{}
 
-	AddImageItemHook(boil.BeforeDeleteHook, imageItemBeforeDeleteHook)
+	AddEmployeeHook(boil.BeforeDeleteHook, employeeBeforeDeleteHook)
 	if err = o.doBeforeDeleteHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeDeleteHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeDeleteHook function to empty object, but got: %#v", o)
 	}
-	imageItemBeforeDeleteHooks = []ImageItemHook{}
+	employeeBeforeDeleteHooks = []EmployeeHook{}
 
-	AddImageItemHook(boil.AfterDeleteHook, imageItemAfterDeleteHook)
+	AddEmployeeHook(boil.AfterDeleteHook, employeeAfterDeleteHook)
 	if err = o.doAfterDeleteHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterDeleteHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterDeleteHook function to empty object, but got: %#v", o)
 	}
-	imageItemAfterDeleteHooks = []ImageItemHook{}
+	employeeAfterDeleteHooks = []EmployeeHook{}
 
-	AddImageItemHook(boil.BeforeUpsertHook, imageItemBeforeUpsertHook)
+	AddEmployeeHook(boil.BeforeUpsertHook, employeeBeforeUpsertHook)
 	if err = o.doBeforeUpsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeUpsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeUpsertHook function to empty object, but got: %#v", o)
 	}
-	imageItemBeforeUpsertHooks = []ImageItemHook{}
+	employeeBeforeUpsertHooks = []EmployeeHook{}
 
-	AddImageItemHook(boil.AfterUpsertHook, imageItemAfterUpsertHook)
+	AddEmployeeHook(boil.AfterUpsertHook, employeeAfterUpsertHook)
 	if err = o.doAfterUpsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterUpsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterUpsertHook function to empty object, but got: %#v", o)
 	}
-	imageItemAfterUpsertHooks = []ImageItemHook{}
+	employeeAfterUpsertHooks = []EmployeeHook{}
 }
 
-func testImageItemsInsert(t *testing.T) {
+func testEmployeesInsert(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &ImageItem{}
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := &Employee{}
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -457,7 +457,7 @@ func testImageItemsInsert(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := ImageItems().Count(ctx, tx)
+	count, err := Employees().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -467,24 +467,24 @@ func testImageItemsInsert(t *testing.T) {
 	}
 }
 
-func testImageItemsInsertWhitelist(t *testing.T) {
+func testEmployeesInsertWhitelist(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &ImageItem{}
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := &Employee{}
+	if err = randomize.Struct(seed, o, employeeDBTypes, true); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = o.Insert(ctx, tx, boil.Whitelist(imageItemColumnsWithoutDefault...)); err != nil {
+	if err = o.Insert(ctx, tx, boil.Whitelist(employeeColumnsWithoutDefault...)); err != nil {
 		t.Error(err)
 	}
 
-	count, err := ImageItems().Count(ctx, tx)
+	count, err := Employees().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -494,14 +494,14 @@ func testImageItemsInsertWhitelist(t *testing.T) {
 	}
 }
 
-func testImageItemsReload(t *testing.T) {
+func testEmployeesReload(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &ImageItem{}
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := &Employee{}
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -516,14 +516,14 @@ func testImageItemsReload(t *testing.T) {
 	}
 }
 
-func testImageItemsReloadAll(t *testing.T) {
+func testEmployeesReloadAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &ImageItem{}
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := &Employee{}
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -533,21 +533,21 @@ func testImageItemsReloadAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := ImageItemSlice{o}
+	slice := EmployeeSlice{o}
 
 	if err = slice.ReloadAll(ctx, tx); err != nil {
 		t.Error(err)
 	}
 }
 
-func testImageItemsSelect(t *testing.T) {
+func testEmployeesSelect(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &ImageItem{}
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := &Employee{}
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -557,7 +557,7 @@ func testImageItemsSelect(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice, err := ImageItems().All(ctx, tx)
+	slice, err := Employees().All(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -568,25 +568,25 @@ func testImageItemsSelect(t *testing.T) {
 }
 
 var (
-	imageItemDBTypes = map[string]string{`ID`: `int`, `Name`: `varchar`, `Picture`: `blob`, `UpdateDateTime`: `timestamp`, `Department`: `varchar`, `Remarks`: `varchar`, `CreatedAt`: `timestamp`, `UpdatedAt`: `timestamp`}
-	_                = bytes.MinRead
+	employeeDBTypes = map[string]string{`ID`: `int`, `Name`: `varchar`, `Picture`: `blob`, `UpdateDateTime`: `timestamp`, `Department`: `varchar`, `Remarks`: `varchar`, `CreatedAt`: `timestamp`, `UpdatedAt`: `timestamp`}
+	_               = bytes.MinRead
 )
 
-func testImageItemsUpdate(t *testing.T) {
+func testEmployeesUpdate(t *testing.T) {
 	t.Parallel()
 
-	if 0 == len(imageItemPrimaryKeyColumns) {
+	if 0 == len(employeePrimaryKeyColumns) {
 		t.Skip("Skipping table with no primary key columns")
 	}
-	if len(imageItemAllColumns) == len(imageItemPrimaryKeyColumns) {
+	if len(employeeAllColumns) == len(employeePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &ImageItem{}
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := &Employee{}
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -596,7 +596,7 @@ func testImageItemsUpdate(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := ImageItems().Count(ctx, tx)
+	count, err := Employees().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -605,8 +605,8 @@ func testImageItemsUpdate(t *testing.T) {
 		t.Error("want one record, got:", count)
 	}
 
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemPrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	if rowsAff, err := o.Update(ctx, tx, boil.Infer()); err != nil {
@@ -616,18 +616,18 @@ func testImageItemsUpdate(t *testing.T) {
 	}
 }
 
-func testImageItemsSliceUpdateAll(t *testing.T) {
+func testEmployeesSliceUpdateAll(t *testing.T) {
 	t.Parallel()
 
-	if len(imageItemAllColumns) == len(imageItemPrimaryKeyColumns) {
+	if len(employeeAllColumns) == len(employeePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &ImageItem{}
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := &Employee{}
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -637,7 +637,7 @@ func testImageItemsSliceUpdateAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := ImageItems().Count(ctx, tx)
+	count, err := Employees().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -646,18 +646,18 @@ func testImageItemsSliceUpdateAll(t *testing.T) {
 		t.Error("want one record, got:", count)
 	}
 
-	if err = randomize.Struct(seed, o, imageItemDBTypes, true, imageItemPrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	if err = randomize.Struct(seed, o, employeeDBTypes, true, employeePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	// Remove Primary keys and unique columns from what we plan to update
 	var fields []string
-	if strmangle.StringSliceMatch(imageItemAllColumns, imageItemPrimaryKeyColumns) {
-		fields = imageItemAllColumns
+	if strmangle.StringSliceMatch(employeeAllColumns, employeePrimaryKeyColumns) {
+		fields = employeeAllColumns
 	} else {
 		fields = strmangle.SetComplement(
-			imageItemAllColumns,
-			imageItemPrimaryKeyColumns,
+			employeeAllColumns,
+			employeePrimaryKeyColumns,
 		)
 	}
 
@@ -675,7 +675,7 @@ func testImageItemsSliceUpdateAll(t *testing.T) {
 		}
 	}
 
-	slice := ImageItemSlice{o}
+	slice := EmployeeSlice{o}
 	if rowsAff, err := slice.UpdateAll(ctx, tx, updateMap); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
@@ -683,32 +683,32 @@ func testImageItemsSliceUpdateAll(t *testing.T) {
 	}
 }
 
-func testImageItemsUpsert(t *testing.T) {
+func testEmployeesUpsert(t *testing.T) {
 	t.Parallel()
 
-	if len(imageItemAllColumns) == len(imageItemPrimaryKeyColumns) {
+	if len(employeeAllColumns) == len(employeePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
-	if len(mySQLImageItemUniqueColumns) == 0 {
+	if len(mySQLEmployeeUniqueColumns) == 0 {
 		t.Skip("Skipping table with no unique columns to conflict on")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
 	// Attempt the INSERT side of an UPSERT
-	o := ImageItem{}
-	if err = randomize.Struct(seed, &o, imageItemDBTypes, false); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	o := Employee{}
+	if err = randomize.Struct(seed, &o, employeeDBTypes, false); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 	if err = o.Upsert(ctx, tx, boil.Infer(), boil.Infer()); err != nil {
-		t.Errorf("Unable to upsert ImageItem: %s", err)
+		t.Errorf("Unable to upsert Employee: %s", err)
 	}
 
-	count, err := ImageItems().Count(ctx, tx)
+	count, err := Employees().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -717,15 +717,15 @@ func testImageItemsUpsert(t *testing.T) {
 	}
 
 	// Attempt the UPDATE side of an UPSERT
-	if err = randomize.Struct(seed, &o, imageItemDBTypes, false, imageItemPrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize ImageItem struct: %s", err)
+	if err = randomize.Struct(seed, &o, employeeDBTypes, false, employeePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Employee struct: %s", err)
 	}
 
 	if err = o.Upsert(ctx, tx, boil.Infer(), boil.Infer()); err != nil {
-		t.Errorf("Unable to upsert ImageItem: %s", err)
+		t.Errorf("Unable to upsert Employee: %s", err)
 	}
 
-	count, err = ImageItems().Count(ctx, tx)
+	count, err = Employees().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}

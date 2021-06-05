@@ -22,8 +22,8 @@ import (
 	"github.com/volatiletech/strmangle"
 )
 
-// ImageItem is an object representing the database table.
-type ImageItem struct {
+// Employee is an object representing the database table.
+type Employee struct {
 	ID             uint        `boil:"id" json:"id" toml:"id" yaml:"id"`
 	Name           string      `boil:"name" json:"name" toml:"name" yaml:"name"`
 	Picture        []byte      `boil:"picture" json:"picture" toml:"picture" yaml:"picture"`
@@ -33,11 +33,11 @@ type ImageItem struct {
 	CreatedAt      time.Time   `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
 	UpdatedAt      time.Time   `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
 
-	R *imageItemR `boil:"-" json:"-" toml:"-" yaml:"-"`
-	L imageItemL  `boil:"-" json:"-" toml:"-" yaml:"-"`
+	R *employeeR `boil:"-" json:"-" toml:"-" yaml:"-"`
+	L employeeL  `boil:"-" json:"-" toml:"-" yaml:"-"`
 }
 
-var ImageItemColumns = struct {
+var EmployeeColumns = struct {
 	ID             string
 	Name           string
 	Picture        string
@@ -158,7 +158,7 @@ func (w whereHelpernull_String) GTE(x null.String) qm.QueryMod {
 	return qmhelper.Where(w.field, qmhelper.GTE, x)
 }
 
-var ImageItemWhere = struct {
+var EmployeeWhere = struct {
 	ID             whereHelperuint
 	Name           whereHelperstring
 	Picture        whereHelper__byte
@@ -168,62 +168,62 @@ var ImageItemWhere = struct {
 	CreatedAt      whereHelpertime_Time
 	UpdatedAt      whereHelpertime_Time
 }{
-	ID:             whereHelperuint{field: "`image_item`.`id`"},
-	Name:           whereHelperstring{field: "`image_item`.`name`"},
-	Picture:        whereHelper__byte{field: "`image_item`.`picture`"},
-	UpdateDateTime: whereHelpertime_Time{field: "`image_item`.`update_date_time`"},
-	Department:     whereHelpernull_String{field: "`image_item`.`department`"},
-	Remarks:        whereHelpernull_String{field: "`image_item`.`remarks`"},
-	CreatedAt:      whereHelpertime_Time{field: "`image_item`.`created_at`"},
-	UpdatedAt:      whereHelpertime_Time{field: "`image_item`.`updated_at`"},
+	ID:             whereHelperuint{field: "`employee`.`id`"},
+	Name:           whereHelperstring{field: "`employee`.`name`"},
+	Picture:        whereHelper__byte{field: "`employee`.`picture`"},
+	UpdateDateTime: whereHelpertime_Time{field: "`employee`.`update_date_time`"},
+	Department:     whereHelpernull_String{field: "`employee`.`department`"},
+	Remarks:        whereHelpernull_String{field: "`employee`.`remarks`"},
+	CreatedAt:      whereHelpertime_Time{field: "`employee`.`created_at`"},
+	UpdatedAt:      whereHelpertime_Time{field: "`employee`.`updated_at`"},
 }
 
-// ImageItemRels is where relationship names are stored.
-var ImageItemRels = struct {
+// EmployeeRels is where relationship names are stored.
+var EmployeeRels = struct {
 }{}
 
-// imageItemR is where relationships are stored.
-type imageItemR struct {
+// employeeR is where relationships are stored.
+type employeeR struct {
 }
 
 // NewStruct creates a new relationship struct
-func (*imageItemR) NewStruct() *imageItemR {
-	return &imageItemR{}
+func (*employeeR) NewStruct() *employeeR {
+	return &employeeR{}
 }
 
-// imageItemL is where Load methods for each relationship are stored.
-type imageItemL struct{}
+// employeeL is where Load methods for each relationship are stored.
+type employeeL struct{}
 
 var (
-	imageItemAllColumns            = []string{"id", "name", "picture", "update_date_time", "department", "remarks", "created_at", "updated_at"}
-	imageItemColumnsWithoutDefault = []string{"name", "picture", "department", "remarks"}
-	imageItemColumnsWithDefault    = []string{"id", "update_date_time", "created_at", "updated_at"}
-	imageItemPrimaryKeyColumns     = []string{"id"}
+	employeeAllColumns            = []string{"id", "name", "picture", "update_date_time", "department", "remarks", "created_at", "updated_at"}
+	employeeColumnsWithoutDefault = []string{"name", "picture", "department", "remarks"}
+	employeeColumnsWithDefault    = []string{"id", "update_date_time", "created_at", "updated_at"}
+	employeePrimaryKeyColumns     = []string{"id"}
 )
 
 type (
-	// ImageItemSlice is an alias for a slice of pointers to ImageItem.
-	// This should generally be used opposed to []ImageItem.
-	ImageItemSlice []*ImageItem
-	// ImageItemHook is the signature for custom ImageItem hook methods
-	ImageItemHook func(context.Context, boil.ContextExecutor, *ImageItem) error
+	// EmployeeSlice is an alias for a slice of pointers to Employee.
+	// This should generally be used opposed to []Employee.
+	EmployeeSlice []*Employee
+	// EmployeeHook is the signature for custom Employee hook methods
+	EmployeeHook func(context.Context, boil.ContextExecutor, *Employee) error
 
-	imageItemQuery struct {
+	employeeQuery struct {
 		*queries.Query
 	}
 )
 
 // Cache for insert, update and upsert
 var (
-	imageItemType                 = reflect.TypeOf(&ImageItem{})
-	imageItemMapping              = queries.MakeStructMapping(imageItemType)
-	imageItemPrimaryKeyMapping, _ = queries.BindMapping(imageItemType, imageItemMapping, imageItemPrimaryKeyColumns)
-	imageItemInsertCacheMut       sync.RWMutex
-	imageItemInsertCache          = make(map[string]insertCache)
-	imageItemUpdateCacheMut       sync.RWMutex
-	imageItemUpdateCache          = make(map[string]updateCache)
-	imageItemUpsertCacheMut       sync.RWMutex
-	imageItemUpsertCache          = make(map[string]insertCache)
+	employeeType                 = reflect.TypeOf(&Employee{})
+	employeeMapping              = queries.MakeStructMapping(employeeType)
+	employeePrimaryKeyMapping, _ = queries.BindMapping(employeeType, employeeMapping, employeePrimaryKeyColumns)
+	employeeInsertCacheMut       sync.RWMutex
+	employeeInsertCache          = make(map[string]insertCache)
+	employeeUpdateCacheMut       sync.RWMutex
+	employeeUpdateCache          = make(map[string]updateCache)
+	employeeUpsertCacheMut       sync.RWMutex
+	employeeUpsertCache          = make(map[string]insertCache)
 )
 
 var (
@@ -234,24 +234,24 @@ var (
 	_ = qmhelper.Where
 )
 
-var imageItemBeforeInsertHooks []ImageItemHook
-var imageItemBeforeUpdateHooks []ImageItemHook
-var imageItemBeforeDeleteHooks []ImageItemHook
-var imageItemBeforeUpsertHooks []ImageItemHook
+var employeeBeforeInsertHooks []EmployeeHook
+var employeeBeforeUpdateHooks []EmployeeHook
+var employeeBeforeDeleteHooks []EmployeeHook
+var employeeBeforeUpsertHooks []EmployeeHook
 
-var imageItemAfterInsertHooks []ImageItemHook
-var imageItemAfterSelectHooks []ImageItemHook
-var imageItemAfterUpdateHooks []ImageItemHook
-var imageItemAfterDeleteHooks []ImageItemHook
-var imageItemAfterUpsertHooks []ImageItemHook
+var employeeAfterInsertHooks []EmployeeHook
+var employeeAfterSelectHooks []EmployeeHook
+var employeeAfterUpdateHooks []EmployeeHook
+var employeeAfterDeleteHooks []EmployeeHook
+var employeeAfterUpsertHooks []EmployeeHook
 
 // doBeforeInsertHooks executes all "before insert" hooks.
-func (o *ImageItem) doBeforeInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Employee) doBeforeInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range imageItemBeforeInsertHooks {
+	for _, hook := range employeeBeforeInsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -261,12 +261,12 @@ func (o *ImageItem) doBeforeInsertHooks(ctx context.Context, exec boil.ContextEx
 }
 
 // doBeforeUpdateHooks executes all "before Update" hooks.
-func (o *ImageItem) doBeforeUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Employee) doBeforeUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range imageItemBeforeUpdateHooks {
+	for _, hook := range employeeBeforeUpdateHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -276,12 +276,12 @@ func (o *ImageItem) doBeforeUpdateHooks(ctx context.Context, exec boil.ContextEx
 }
 
 // doBeforeDeleteHooks executes all "before Delete" hooks.
-func (o *ImageItem) doBeforeDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Employee) doBeforeDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range imageItemBeforeDeleteHooks {
+	for _, hook := range employeeBeforeDeleteHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -291,12 +291,12 @@ func (o *ImageItem) doBeforeDeleteHooks(ctx context.Context, exec boil.ContextEx
 }
 
 // doBeforeUpsertHooks executes all "before Upsert" hooks.
-func (o *ImageItem) doBeforeUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Employee) doBeforeUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range imageItemBeforeUpsertHooks {
+	for _, hook := range employeeBeforeUpsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -306,12 +306,12 @@ func (o *ImageItem) doBeforeUpsertHooks(ctx context.Context, exec boil.ContextEx
 }
 
 // doAfterInsertHooks executes all "after Insert" hooks.
-func (o *ImageItem) doAfterInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Employee) doAfterInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range imageItemAfterInsertHooks {
+	for _, hook := range employeeAfterInsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -321,12 +321,12 @@ func (o *ImageItem) doAfterInsertHooks(ctx context.Context, exec boil.ContextExe
 }
 
 // doAfterSelectHooks executes all "after Select" hooks.
-func (o *ImageItem) doAfterSelectHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Employee) doAfterSelectHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range imageItemAfterSelectHooks {
+	for _, hook := range employeeAfterSelectHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -336,12 +336,12 @@ func (o *ImageItem) doAfterSelectHooks(ctx context.Context, exec boil.ContextExe
 }
 
 // doAfterUpdateHooks executes all "after Update" hooks.
-func (o *ImageItem) doAfterUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Employee) doAfterUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range imageItemAfterUpdateHooks {
+	for _, hook := range employeeAfterUpdateHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -351,12 +351,12 @@ func (o *ImageItem) doAfterUpdateHooks(ctx context.Context, exec boil.ContextExe
 }
 
 // doAfterDeleteHooks executes all "after Delete" hooks.
-func (o *ImageItem) doAfterDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Employee) doAfterDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range imageItemAfterDeleteHooks {
+	for _, hook := range employeeAfterDeleteHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -366,12 +366,12 @@ func (o *ImageItem) doAfterDeleteHooks(ctx context.Context, exec boil.ContextExe
 }
 
 // doAfterUpsertHooks executes all "after Upsert" hooks.
-func (o *ImageItem) doAfterUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Employee) doAfterUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range imageItemAfterUpsertHooks {
+	for _, hook := range employeeAfterUpsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -380,33 +380,33 @@ func (o *ImageItem) doAfterUpsertHooks(ctx context.Context, exec boil.ContextExe
 	return nil
 }
 
-// AddImageItemHook registers your hook function for all future operations.
-func AddImageItemHook(hookPoint boil.HookPoint, imageItemHook ImageItemHook) {
+// AddEmployeeHook registers your hook function for all future operations.
+func AddEmployeeHook(hookPoint boil.HookPoint, employeeHook EmployeeHook) {
 	switch hookPoint {
 	case boil.BeforeInsertHook:
-		imageItemBeforeInsertHooks = append(imageItemBeforeInsertHooks, imageItemHook)
+		employeeBeforeInsertHooks = append(employeeBeforeInsertHooks, employeeHook)
 	case boil.BeforeUpdateHook:
-		imageItemBeforeUpdateHooks = append(imageItemBeforeUpdateHooks, imageItemHook)
+		employeeBeforeUpdateHooks = append(employeeBeforeUpdateHooks, employeeHook)
 	case boil.BeforeDeleteHook:
-		imageItemBeforeDeleteHooks = append(imageItemBeforeDeleteHooks, imageItemHook)
+		employeeBeforeDeleteHooks = append(employeeBeforeDeleteHooks, employeeHook)
 	case boil.BeforeUpsertHook:
-		imageItemBeforeUpsertHooks = append(imageItemBeforeUpsertHooks, imageItemHook)
+		employeeBeforeUpsertHooks = append(employeeBeforeUpsertHooks, employeeHook)
 	case boil.AfterInsertHook:
-		imageItemAfterInsertHooks = append(imageItemAfterInsertHooks, imageItemHook)
+		employeeAfterInsertHooks = append(employeeAfterInsertHooks, employeeHook)
 	case boil.AfterSelectHook:
-		imageItemAfterSelectHooks = append(imageItemAfterSelectHooks, imageItemHook)
+		employeeAfterSelectHooks = append(employeeAfterSelectHooks, employeeHook)
 	case boil.AfterUpdateHook:
-		imageItemAfterUpdateHooks = append(imageItemAfterUpdateHooks, imageItemHook)
+		employeeAfterUpdateHooks = append(employeeAfterUpdateHooks, employeeHook)
 	case boil.AfterDeleteHook:
-		imageItemAfterDeleteHooks = append(imageItemAfterDeleteHooks, imageItemHook)
+		employeeAfterDeleteHooks = append(employeeAfterDeleteHooks, employeeHook)
 	case boil.AfterUpsertHook:
-		imageItemAfterUpsertHooks = append(imageItemAfterUpsertHooks, imageItemHook)
+		employeeAfterUpsertHooks = append(employeeAfterUpsertHooks, employeeHook)
 	}
 }
 
-// One returns a single imageItem record from the query.
-func (q imageItemQuery) One(ctx context.Context, exec boil.ContextExecutor) (*ImageItem, error) {
-	o := &ImageItem{}
+// One returns a single employee record from the query.
+func (q employeeQuery) One(ctx context.Context, exec boil.ContextExecutor) (*Employee, error) {
+	o := &Employee{}
 
 	queries.SetLimit(q.Query, 1)
 
@@ -415,7 +415,7 @@ func (q imageItemQuery) One(ctx context.Context, exec boil.ContextExecutor) (*Im
 		if errors.Cause(err) == sql.ErrNoRows {
 			return nil, sql.ErrNoRows
 		}
-		return nil, errors.Wrap(err, "entities: failed to execute a one query for image_item")
+		return nil, errors.Wrap(err, "entities: failed to execute a one query for employee")
 	}
 
 	if err := o.doAfterSelectHooks(ctx, exec); err != nil {
@@ -425,16 +425,16 @@ func (q imageItemQuery) One(ctx context.Context, exec boil.ContextExecutor) (*Im
 	return o, nil
 }
 
-// All returns all ImageItem records from the query.
-func (q imageItemQuery) All(ctx context.Context, exec boil.ContextExecutor) (ImageItemSlice, error) {
-	var o []*ImageItem
+// All returns all Employee records from the query.
+func (q employeeQuery) All(ctx context.Context, exec boil.ContextExecutor) (EmployeeSlice, error) {
+	var o []*Employee
 
 	err := q.Bind(ctx, exec, &o)
 	if err != nil {
-		return nil, errors.Wrap(err, "entities: failed to assign all query results to ImageItem slice")
+		return nil, errors.Wrap(err, "entities: failed to assign all query results to Employee slice")
 	}
 
-	if len(imageItemAfterSelectHooks) != 0 {
+	if len(employeeAfterSelectHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doAfterSelectHooks(ctx, exec); err != nil {
 				return o, err
@@ -445,8 +445,8 @@ func (q imageItemQuery) All(ctx context.Context, exec boil.ContextExecutor) (Ima
 	return o, nil
 }
 
-// Count returns the count of all ImageItem records in the query.
-func (q imageItemQuery) Count(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
+// Count returns the count of all Employee records in the query.
+func (q employeeQuery) Count(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
 	var count int64
 
 	queries.SetSelect(q.Query, nil)
@@ -454,14 +454,14 @@ func (q imageItemQuery) Count(ctx context.Context, exec boil.ContextExecutor) (i
 
 	err := q.Query.QueryRowContext(ctx, exec).Scan(&count)
 	if err != nil {
-		return 0, errors.Wrap(err, "entities: failed to count image_item rows")
+		return 0, errors.Wrap(err, "entities: failed to count employee rows")
 	}
 
 	return count, nil
 }
 
 // Exists checks if the row exists in the table.
-func (q imageItemQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool, error) {
+func (q employeeQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool, error) {
 	var count int64
 
 	queries.SetSelect(q.Query, nil)
@@ -470,49 +470,49 @@ func (q imageItemQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (
 
 	err := q.Query.QueryRowContext(ctx, exec).Scan(&count)
 	if err != nil {
-		return false, errors.Wrap(err, "entities: failed to check if image_item exists")
+		return false, errors.Wrap(err, "entities: failed to check if employee exists")
 	}
 
 	return count > 0, nil
 }
 
-// ImageItems retrieves all the records using an executor.
-func ImageItems(mods ...qm.QueryMod) imageItemQuery {
-	mods = append(mods, qm.From("`image_item`"))
-	return imageItemQuery{NewQuery(mods...)}
+// Employees retrieves all the records using an executor.
+func Employees(mods ...qm.QueryMod) employeeQuery {
+	mods = append(mods, qm.From("`employee`"))
+	return employeeQuery{NewQuery(mods...)}
 }
 
-// FindImageItem retrieves a single record by ID with an executor.
+// FindEmployee retrieves a single record by ID with an executor.
 // If selectCols is empty Find will return all columns.
-func FindImageItem(ctx context.Context, exec boil.ContextExecutor, iD uint, selectCols ...string) (*ImageItem, error) {
-	imageItemObj := &ImageItem{}
+func FindEmployee(ctx context.Context, exec boil.ContextExecutor, iD uint, selectCols ...string) (*Employee, error) {
+	employeeObj := &Employee{}
 
 	sel := "*"
 	if len(selectCols) > 0 {
 		sel = strings.Join(strmangle.IdentQuoteSlice(dialect.LQ, dialect.RQ, selectCols), ",")
 	}
 	query := fmt.Sprintf(
-		"select %s from `image_item` where `id`=?", sel,
+		"select %s from `employee` where `id`=?", sel,
 	)
 
 	q := queries.Raw(query, iD)
 
-	err := q.Bind(ctx, exec, imageItemObj)
+	err := q.Bind(ctx, exec, employeeObj)
 	if err != nil {
 		if errors.Cause(err) == sql.ErrNoRows {
 			return nil, sql.ErrNoRows
 		}
-		return nil, errors.Wrap(err, "entities: unable to select from image_item")
+		return nil, errors.Wrap(err, "entities: unable to select from employee")
 	}
 
-	return imageItemObj, nil
+	return employeeObj, nil
 }
 
 // Insert a single record using an executor.
 // See boil.Columns.InsertColumnSet documentation to understand column list inference for inserts.
-func (o *ImageItem) Insert(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) error {
+func (o *Employee) Insert(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) error {
 	if o == nil {
-		return errors.New("entities: no image_item provided for insertion")
+		return errors.New("entities: no employee provided for insertion")
 	}
 
 	var err error
@@ -531,39 +531,39 @@ func (o *ImageItem) Insert(ctx context.Context, exec boil.ContextExecutor, colum
 		return err
 	}
 
-	nzDefaults := queries.NonZeroDefaultSet(imageItemColumnsWithDefault, o)
+	nzDefaults := queries.NonZeroDefaultSet(employeeColumnsWithDefault, o)
 
 	key := makeCacheKey(columns, nzDefaults)
-	imageItemInsertCacheMut.RLock()
-	cache, cached := imageItemInsertCache[key]
-	imageItemInsertCacheMut.RUnlock()
+	employeeInsertCacheMut.RLock()
+	cache, cached := employeeInsertCache[key]
+	employeeInsertCacheMut.RUnlock()
 
 	if !cached {
 		wl, returnColumns := columns.InsertColumnSet(
-			imageItemAllColumns,
-			imageItemColumnsWithDefault,
-			imageItemColumnsWithoutDefault,
+			employeeAllColumns,
+			employeeColumnsWithDefault,
+			employeeColumnsWithoutDefault,
 			nzDefaults,
 		)
 
-		cache.valueMapping, err = queries.BindMapping(imageItemType, imageItemMapping, wl)
+		cache.valueMapping, err = queries.BindMapping(employeeType, employeeMapping, wl)
 		if err != nil {
 			return err
 		}
-		cache.retMapping, err = queries.BindMapping(imageItemType, imageItemMapping, returnColumns)
+		cache.retMapping, err = queries.BindMapping(employeeType, employeeMapping, returnColumns)
 		if err != nil {
 			return err
 		}
 		if len(wl) != 0 {
-			cache.query = fmt.Sprintf("INSERT INTO `image_item` (`%s`) %%sVALUES (%s)%%s", strings.Join(wl, "`,`"), strmangle.Placeholders(dialect.UseIndexPlaceholders, len(wl), 1, 1))
+			cache.query = fmt.Sprintf("INSERT INTO `employee` (`%s`) %%sVALUES (%s)%%s", strings.Join(wl, "`,`"), strmangle.Placeholders(dialect.UseIndexPlaceholders, len(wl), 1, 1))
 		} else {
-			cache.query = "INSERT INTO `image_item` () VALUES ()%s%s"
+			cache.query = "INSERT INTO `employee` () VALUES ()%s%s"
 		}
 
 		var queryOutput, queryReturning string
 
 		if len(cache.retMapping) != 0 {
-			cache.retQuery = fmt.Sprintf("SELECT `%s` FROM `image_item` WHERE %s", strings.Join(returnColumns, "`,`"), strmangle.WhereClause("`", "`", 0, imageItemPrimaryKeyColumns))
+			cache.retQuery = fmt.Sprintf("SELECT `%s` FROM `employee` WHERE %s", strings.Join(returnColumns, "`,`"), strmangle.WhereClause("`", "`", 0, employeePrimaryKeyColumns))
 		}
 
 		cache.query = fmt.Sprintf(cache.query, queryOutput, queryReturning)
@@ -580,7 +580,7 @@ func (o *ImageItem) Insert(ctx context.Context, exec boil.ContextExecutor, colum
 	result, err := exec.ExecContext(ctx, cache.query, vals...)
 
 	if err != nil {
-		return errors.Wrap(err, "entities: unable to insert into image_item")
+		return errors.Wrap(err, "entities: unable to insert into employee")
 	}
 
 	var lastID int64
@@ -596,7 +596,7 @@ func (o *ImageItem) Insert(ctx context.Context, exec boil.ContextExecutor, colum
 	}
 
 	o.ID = uint(lastID)
-	if lastID != 0 && len(cache.retMapping) == 1 && cache.retMapping[0] == imageItemMapping["id"] {
+	if lastID != 0 && len(cache.retMapping) == 1 && cache.retMapping[0] == employeeMapping["id"] {
 		goto CacheNoHooks
 	}
 
@@ -611,23 +611,23 @@ func (o *ImageItem) Insert(ctx context.Context, exec boil.ContextExecutor, colum
 	}
 	err = exec.QueryRowContext(ctx, cache.retQuery, identifierCols...).Scan(queries.PtrsFromMapping(value, cache.retMapping)...)
 	if err != nil {
-		return errors.Wrap(err, "entities: unable to populate default values for image_item")
+		return errors.Wrap(err, "entities: unable to populate default values for employee")
 	}
 
 CacheNoHooks:
 	if !cached {
-		imageItemInsertCacheMut.Lock()
-		imageItemInsertCache[key] = cache
-		imageItemInsertCacheMut.Unlock()
+		employeeInsertCacheMut.Lock()
+		employeeInsertCache[key] = cache
+		employeeInsertCacheMut.Unlock()
 	}
 
 	return o.doAfterInsertHooks(ctx, exec)
 }
 
-// Update uses an executor to update the ImageItem.
+// Update uses an executor to update the Employee.
 // See boil.Columns.UpdateColumnSet documentation to understand column list inference for updates.
 // Update does not automatically update the record in case of default values. Use .Reload() to refresh the records.
-func (o *ImageItem) Update(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) (int64, error) {
+func (o *Employee) Update(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) (int64, error) {
 	if !boil.TimestampsAreSkipped(ctx) {
 		currTime := time.Now().In(boil.GetLocation())
 
@@ -639,28 +639,28 @@ func (o *ImageItem) Update(ctx context.Context, exec boil.ContextExecutor, colum
 		return 0, err
 	}
 	key := makeCacheKey(columns, nil)
-	imageItemUpdateCacheMut.RLock()
-	cache, cached := imageItemUpdateCache[key]
-	imageItemUpdateCacheMut.RUnlock()
+	employeeUpdateCacheMut.RLock()
+	cache, cached := employeeUpdateCache[key]
+	employeeUpdateCacheMut.RUnlock()
 
 	if !cached {
 		wl := columns.UpdateColumnSet(
-			imageItemAllColumns,
-			imageItemPrimaryKeyColumns,
+			employeeAllColumns,
+			employeePrimaryKeyColumns,
 		)
 
 		if !columns.IsWhitelist() {
 			wl = strmangle.SetComplement(wl, []string{"created_at"})
 		}
 		if len(wl) == 0 {
-			return 0, errors.New("entities: unable to update image_item, could not build whitelist")
+			return 0, errors.New("entities: unable to update employee, could not build whitelist")
 		}
 
-		cache.query = fmt.Sprintf("UPDATE `image_item` SET %s WHERE %s",
+		cache.query = fmt.Sprintf("UPDATE `employee` SET %s WHERE %s",
 			strmangle.SetParamNames("`", "`", 0, wl),
-			strmangle.WhereClause("`", "`", 0, imageItemPrimaryKeyColumns),
+			strmangle.WhereClause("`", "`", 0, employeePrimaryKeyColumns),
 		)
-		cache.valueMapping, err = queries.BindMapping(imageItemType, imageItemMapping, append(wl, imageItemPrimaryKeyColumns...))
+		cache.valueMapping, err = queries.BindMapping(employeeType, employeeMapping, append(wl, employeePrimaryKeyColumns...))
 		if err != nil {
 			return 0, err
 		}
@@ -676,42 +676,42 @@ func (o *ImageItem) Update(ctx context.Context, exec boil.ContextExecutor, colum
 	var result sql.Result
 	result, err = exec.ExecContext(ctx, cache.query, values...)
 	if err != nil {
-		return 0, errors.Wrap(err, "entities: unable to update image_item row")
+		return 0, errors.Wrap(err, "entities: unable to update employee row")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "entities: failed to get rows affected by update for image_item")
+		return 0, errors.Wrap(err, "entities: failed to get rows affected by update for employee")
 	}
 
 	if !cached {
-		imageItemUpdateCacheMut.Lock()
-		imageItemUpdateCache[key] = cache
-		imageItemUpdateCacheMut.Unlock()
+		employeeUpdateCacheMut.Lock()
+		employeeUpdateCache[key] = cache
+		employeeUpdateCacheMut.Unlock()
 	}
 
 	return rowsAff, o.doAfterUpdateHooks(ctx, exec)
 }
 
 // UpdateAll updates all rows with the specified column values.
-func (q imageItemQuery) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
+func (q employeeQuery) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
 	queries.SetUpdate(q.Query, cols)
 
 	result, err := q.Query.ExecContext(ctx, exec)
 	if err != nil {
-		return 0, errors.Wrap(err, "entities: unable to update all for image_item")
+		return 0, errors.Wrap(err, "entities: unable to update all for employee")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "entities: unable to retrieve rows affected for image_item")
+		return 0, errors.Wrap(err, "entities: unable to retrieve rows affected for employee")
 	}
 
 	return rowsAff, nil
 }
 
 // UpdateAll updates all rows with the specified column values, using an executor.
-func (o ImageItemSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
+func (o EmployeeSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
 	ln := int64(len(o))
 	if ln == 0 {
 		return 0, nil
@@ -733,13 +733,13 @@ func (o ImageItemSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor
 
 	// Append all of the primary key values for each column
 	for _, obj := range o {
-		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), imageItemPrimaryKeyMapping)
+		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), employeePrimaryKeyMapping)
 		args = append(args, pkeyArgs...)
 	}
 
-	sql := fmt.Sprintf("UPDATE `image_item` SET %s WHERE %s",
+	sql := fmt.Sprintf("UPDATE `employee` SET %s WHERE %s",
 		strmangle.SetParamNames("`", "`", 0, colNames),
-		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 0, imageItemPrimaryKeyColumns, len(o)))
+		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 0, employeePrimaryKeyColumns, len(o)))
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -748,25 +748,25 @@ func (o ImageItemSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "entities: unable to update all in imageItem slice")
+		return 0, errors.Wrap(err, "entities: unable to update all in employee slice")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "entities: unable to retrieve rows affected all in update all imageItem")
+		return 0, errors.Wrap(err, "entities: unable to retrieve rows affected all in update all employee")
 	}
 	return rowsAff, nil
 }
 
-var mySQLImageItemUniqueColumns = []string{
+var mySQLEmployeeUniqueColumns = []string{
 	"id",
 }
 
 // Upsert attempts an insert using an executor, and does an update or ignore on conflict.
 // See boil.Columns documentation for how to properly use updateColumns and insertColumns.
-func (o *ImageItem) Upsert(ctx context.Context, exec boil.ContextExecutor, updateColumns, insertColumns boil.Columns) error {
+func (o *Employee) Upsert(ctx context.Context, exec boil.ContextExecutor, updateColumns, insertColumns boil.Columns) error {
 	if o == nil {
-		return errors.New("entities: no image_item provided for upsert")
+		return errors.New("entities: no employee provided for upsert")
 	}
 	if !boil.TimestampsAreSkipped(ctx) {
 		currTime := time.Now().In(boil.GetLocation())
@@ -781,8 +781,8 @@ func (o *ImageItem) Upsert(ctx context.Context, exec boil.ContextExecutor, updat
 		return err
 	}
 
-	nzDefaults := queries.NonZeroDefaultSet(imageItemColumnsWithDefault, o)
-	nzUniques := queries.NonZeroDefaultSet(mySQLImageItemUniqueColumns, o)
+	nzDefaults := queries.NonZeroDefaultSet(employeeColumnsWithDefault, o)
+	nzUniques := queries.NonZeroDefaultSet(mySQLEmployeeUniqueColumns, o)
 
 	if len(nzUniques) == 0 {
 		return errors.New("cannot upsert with a table that cannot conflict on a unique column")
@@ -810,42 +810,42 @@ func (o *ImageItem) Upsert(ctx context.Context, exec boil.ContextExecutor, updat
 	key := buf.String()
 	strmangle.PutBuffer(buf)
 
-	imageItemUpsertCacheMut.RLock()
-	cache, cached := imageItemUpsertCache[key]
-	imageItemUpsertCacheMut.RUnlock()
+	employeeUpsertCacheMut.RLock()
+	cache, cached := employeeUpsertCache[key]
+	employeeUpsertCacheMut.RUnlock()
 
 	var err error
 
 	if !cached {
 		insert, ret := insertColumns.InsertColumnSet(
-			imageItemAllColumns,
-			imageItemColumnsWithDefault,
-			imageItemColumnsWithoutDefault,
+			employeeAllColumns,
+			employeeColumnsWithDefault,
+			employeeColumnsWithoutDefault,
 			nzDefaults,
 		)
 		update := updateColumns.UpdateColumnSet(
-			imageItemAllColumns,
-			imageItemPrimaryKeyColumns,
+			employeeAllColumns,
+			employeePrimaryKeyColumns,
 		)
 
 		if !updateColumns.IsNone() && len(update) == 0 {
-			return errors.New("entities: unable to upsert image_item, could not build update column list")
+			return errors.New("entities: unable to upsert employee, could not build update column list")
 		}
 
 		ret = strmangle.SetComplement(ret, nzUniques)
-		cache.query = buildUpsertQueryMySQL(dialect, "`image_item`", update, insert)
+		cache.query = buildUpsertQueryMySQL(dialect, "`employee`", update, insert)
 		cache.retQuery = fmt.Sprintf(
-			"SELECT %s FROM `image_item` WHERE %s",
+			"SELECT %s FROM `employee` WHERE %s",
 			strings.Join(strmangle.IdentQuoteSlice(dialect.LQ, dialect.RQ, ret), ","),
 			strmangle.WhereClause("`", "`", 0, nzUniques),
 		)
 
-		cache.valueMapping, err = queries.BindMapping(imageItemType, imageItemMapping, insert)
+		cache.valueMapping, err = queries.BindMapping(employeeType, employeeMapping, insert)
 		if err != nil {
 			return err
 		}
 		if len(ret) != 0 {
-			cache.retMapping, err = queries.BindMapping(imageItemType, imageItemMapping, ret)
+			cache.retMapping, err = queries.BindMapping(employeeType, employeeMapping, ret)
 			if err != nil {
 				return err
 			}
@@ -867,7 +867,7 @@ func (o *ImageItem) Upsert(ctx context.Context, exec boil.ContextExecutor, updat
 	result, err := exec.ExecContext(ctx, cache.query, vals...)
 
 	if err != nil {
-		return errors.Wrap(err, "entities: unable to upsert for image_item")
+		return errors.Wrap(err, "entities: unable to upsert for employee")
 	}
 
 	var lastID int64
@@ -884,13 +884,13 @@ func (o *ImageItem) Upsert(ctx context.Context, exec boil.ContextExecutor, updat
 	}
 
 	o.ID = uint(lastID)
-	if lastID != 0 && len(cache.retMapping) == 1 && cache.retMapping[0] == imageItemMapping["id"] {
+	if lastID != 0 && len(cache.retMapping) == 1 && cache.retMapping[0] == employeeMapping["id"] {
 		goto CacheNoHooks
 	}
 
-	uniqueMap, err = queries.BindMapping(imageItemType, imageItemMapping, nzUniques)
+	uniqueMap, err = queries.BindMapping(employeeType, employeeMapping, nzUniques)
 	if err != nil {
-		return errors.Wrap(err, "entities: unable to retrieve unique values for image_item")
+		return errors.Wrap(err, "entities: unable to retrieve unique values for employee")
 	}
 	nzUniqueCols = queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(o)), uniqueMap)
 
@@ -901,32 +901,32 @@ func (o *ImageItem) Upsert(ctx context.Context, exec boil.ContextExecutor, updat
 	}
 	err = exec.QueryRowContext(ctx, cache.retQuery, nzUniqueCols...).Scan(returns...)
 	if err != nil {
-		return errors.Wrap(err, "entities: unable to populate default values for image_item")
+		return errors.Wrap(err, "entities: unable to populate default values for employee")
 	}
 
 CacheNoHooks:
 	if !cached {
-		imageItemUpsertCacheMut.Lock()
-		imageItemUpsertCache[key] = cache
-		imageItemUpsertCacheMut.Unlock()
+		employeeUpsertCacheMut.Lock()
+		employeeUpsertCache[key] = cache
+		employeeUpsertCacheMut.Unlock()
 	}
 
 	return o.doAfterUpsertHooks(ctx, exec)
 }
 
-// Delete deletes a single ImageItem record with an executor.
+// Delete deletes a single Employee record with an executor.
 // Delete will match against the primary key column to find the record to delete.
-func (o *ImageItem) Delete(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
+func (o *Employee) Delete(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
 	if o == nil {
-		return 0, errors.New("entities: no ImageItem provided for delete")
+		return 0, errors.New("entities: no Employee provided for delete")
 	}
 
 	if err := o.doBeforeDeleteHooks(ctx, exec); err != nil {
 		return 0, err
 	}
 
-	args := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(o)), imageItemPrimaryKeyMapping)
-	sql := "DELETE FROM `image_item` WHERE `id`=?"
+	args := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(o)), employeePrimaryKeyMapping)
+	sql := "DELETE FROM `employee` WHERE `id`=?"
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -935,12 +935,12 @@ func (o *ImageItem) Delete(ctx context.Context, exec boil.ContextExecutor) (int6
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "entities: unable to delete from image_item")
+		return 0, errors.Wrap(err, "entities: unable to delete from employee")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "entities: failed to get rows affected by delete for image_item")
+		return 0, errors.Wrap(err, "entities: failed to get rows affected by delete for employee")
 	}
 
 	if err := o.doAfterDeleteHooks(ctx, exec); err != nil {
@@ -951,33 +951,33 @@ func (o *ImageItem) Delete(ctx context.Context, exec boil.ContextExecutor) (int6
 }
 
 // DeleteAll deletes all matching rows.
-func (q imageItemQuery) DeleteAll(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
+func (q employeeQuery) DeleteAll(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
 	if q.Query == nil {
-		return 0, errors.New("entities: no imageItemQuery provided for delete all")
+		return 0, errors.New("entities: no employeeQuery provided for delete all")
 	}
 
 	queries.SetDelete(q.Query)
 
 	result, err := q.Query.ExecContext(ctx, exec)
 	if err != nil {
-		return 0, errors.Wrap(err, "entities: unable to delete all from image_item")
+		return 0, errors.Wrap(err, "entities: unable to delete all from employee")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "entities: failed to get rows affected by deleteall for image_item")
+		return 0, errors.Wrap(err, "entities: failed to get rows affected by deleteall for employee")
 	}
 
 	return rowsAff, nil
 }
 
 // DeleteAll deletes all rows in the slice, using an executor.
-func (o ImageItemSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
+func (o EmployeeSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
 	if len(o) == 0 {
 		return 0, nil
 	}
 
-	if len(imageItemBeforeDeleteHooks) != 0 {
+	if len(employeeBeforeDeleteHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doBeforeDeleteHooks(ctx, exec); err != nil {
 				return 0, err
@@ -987,12 +987,12 @@ func (o ImageItemSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor
 
 	var args []interface{}
 	for _, obj := range o {
-		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), imageItemPrimaryKeyMapping)
+		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), employeePrimaryKeyMapping)
 		args = append(args, pkeyArgs...)
 	}
 
-	sql := "DELETE FROM `image_item` WHERE " +
-		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 0, imageItemPrimaryKeyColumns, len(o))
+	sql := "DELETE FROM `employee` WHERE " +
+		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 0, employeePrimaryKeyColumns, len(o))
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -1001,15 +1001,15 @@ func (o ImageItemSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "entities: unable to delete all from imageItem slice")
+		return 0, errors.Wrap(err, "entities: unable to delete all from employee slice")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "entities: failed to get rows affected by deleteall for image_item")
+		return 0, errors.Wrap(err, "entities: failed to get rows affected by deleteall for employee")
 	}
 
-	if len(imageItemAfterDeleteHooks) != 0 {
+	if len(employeeAfterDeleteHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doAfterDeleteHooks(ctx, exec); err != nil {
 				return 0, err
@@ -1022,8 +1022,8 @@ func (o ImageItemSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor
 
 // Reload refetches the object from the database
 // using the primary keys with an executor.
-func (o *ImageItem) Reload(ctx context.Context, exec boil.ContextExecutor) error {
-	ret, err := FindImageItem(ctx, exec, o.ID)
+func (o *Employee) Reload(ctx context.Context, exec boil.ContextExecutor) error {
+	ret, err := FindEmployee(ctx, exec, o.ID)
 	if err != nil {
 		return err
 	}
@@ -1034,26 +1034,26 @@ func (o *ImageItem) Reload(ctx context.Context, exec boil.ContextExecutor) error
 
 // ReloadAll refetches every row with matching primary key column values
 // and overwrites the original object slice with the newly updated slice.
-func (o *ImageItemSlice) ReloadAll(ctx context.Context, exec boil.ContextExecutor) error {
+func (o *EmployeeSlice) ReloadAll(ctx context.Context, exec boil.ContextExecutor) error {
 	if o == nil || len(*o) == 0 {
 		return nil
 	}
 
-	slice := ImageItemSlice{}
+	slice := EmployeeSlice{}
 	var args []interface{}
 	for _, obj := range *o {
-		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), imageItemPrimaryKeyMapping)
+		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), employeePrimaryKeyMapping)
 		args = append(args, pkeyArgs...)
 	}
 
-	sql := "SELECT `image_item`.* FROM `image_item` WHERE " +
-		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 0, imageItemPrimaryKeyColumns, len(*o))
+	sql := "SELECT `employee`.* FROM `employee` WHERE " +
+		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 0, employeePrimaryKeyColumns, len(*o))
 
 	q := queries.Raw(sql, args...)
 
 	err := q.Bind(ctx, exec, &slice)
 	if err != nil {
-		return errors.Wrap(err, "entities: unable to reload all in ImageItemSlice")
+		return errors.Wrap(err, "entities: unable to reload all in EmployeeSlice")
 	}
 
 	*o = slice
@@ -1061,10 +1061,10 @@ func (o *ImageItemSlice) ReloadAll(ctx context.Context, exec boil.ContextExecuto
 	return nil
 }
 
-// ImageItemExists checks if the ImageItem row exists.
-func ImageItemExists(ctx context.Context, exec boil.ContextExecutor, iD uint) (bool, error) {
+// EmployeeExists checks if the Employee row exists.
+func EmployeeExists(ctx context.Context, exec boil.ContextExecutor, iD uint) (bool, error) {
 	var exists bool
-	sql := "select exists(select 1 from `image_item` where `id`=? limit 1)"
+	sql := "select exists(select 1 from `employee` where `id`=? limit 1)"
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -1075,7 +1075,7 @@ func ImageItemExists(ctx context.Context, exec boil.ContextExecutor, iD uint) (b
 
 	err := row.Scan(&exists)
 	if err != nil {
-		return false, errors.Wrap(err, "entities: unable to check if image_item exists")
+		return false, errors.Wrap(err, "entities: unable to check if employee exists")
 	}
 
 	return exists, nil
