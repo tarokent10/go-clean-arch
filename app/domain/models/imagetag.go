@@ -1,6 +1,0 @@
-package models
-
-type ImageTag struct {
-	ID   uint   `json:"id"`
-	Name string `json:"name"`
-}

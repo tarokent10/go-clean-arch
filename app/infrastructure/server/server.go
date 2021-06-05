@@ -28,14 +28,14 @@ func Run(c *dig.Container) {
 		authController controller.AuthContorollerIF,
 	) {
 		r.POST("/v1/auth/login/", authController.Login)
-		r.GET("/v1/test/", func(ctx *gin.Context) {
-			s := sessions.Default(ctx)
-			fmt.Printf("get: %v¥n", s.Get("key"))
-			s.Set("key", "testtesttest")
-			if err := s.Save(); err != nil {
-				println(err.Error())
-			}
-		})
+		// r.GET("/v1/test/", func(ctx *gin.Context) {
+		// 	s := sessions.Default(ctx)
+		// 	fmt.Printf("get: %v¥n", s.Get("key"))
+		// 	s.Set("key", "testtesttest")
+		// 	if err := s.Save(); err != nil {
+		// 		println(err.Error())
+		// 	}
+		// })
 	}); err != nil {
 		log.Fatal(fmt.Sprintf("error at dig invoke-> %s", err.Error()))
 	}

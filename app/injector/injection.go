@@ -28,7 +28,7 @@ func InitDIContainer(conn connector.DBConnector) (*dig.Container, error) {
 	}), errors)
 	errors = appendIfExists(c.Provide(gateway.NewUserRepository), errors)
 	// usecase
-	errors = appendIfExists(c.Provide(usecase.NewAuthUsecase), errors)
+	errors = appendIfExists(c.Provide(usecase.NewEmployeeUsecase), errors)
 	// contoroller
 	errors = appendIfExists(c.Provide(controller.NewAuthContoroller), errors)
 
