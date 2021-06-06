@@ -29,7 +29,7 @@ export default {
   methods: {
     get: function () {
       const is = this.images
-      axios.get('/v1/images/', {
+      axios.get('/v1/employees/', {
         withCredentials: true
       }).then(function (res) {
         res.data.forEach(e => {

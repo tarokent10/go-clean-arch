@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import TitlePage from '@/pages/TitlePage.vue'
-import CardGame from '@/pages/CardGame.vue'
 import RegistImage from '@/pages/RegistImage.vue'
 import Images from '@/pages/Images.vue'
 
@@ -10,13 +9,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'titlePage', // タイトルページできたら修正
+    name: 'titlePage',
     component: TitlePage
-  },
-  {
-    path: '/cardgame',
-    name: 'cardgame',
-    component: CardGame
   },
   {
     path: '/registImage',

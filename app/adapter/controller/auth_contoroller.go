@@ -11,6 +11,7 @@ import (
 
 type AuthContorollerIF interface {
 	Login(ctx *gin.Context)
+	Logout(ctx *gin.Context)
 }
 
 // UserContoroller is a handler of image tag
@@ -38,5 +39,14 @@ func (c AuthContoroller) Login(ctx *gin.Context) {
 		return
 	}
 	ctx.JSON(http.StatusOK, "")
+}
 
+func (c AuthContoroller) Logout(ctx *gin.Context) {
+	err := c.authUC.Logout(ctx)
+	if err != nil {
+		log.Err(err.Error())
+		ctx.String(http.StatusInternalServerError, "faild to logou")
+		return
+	}
+	ctx.JSON(http.StatusOK, "")
 }

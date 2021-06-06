@@ -18,7 +18,6 @@ func Run(c *dig.Container) {
 	// set routing table for resource handler
 	r := gin.Default()
 	store, err := redis.NewStore(10, "tcp", "redis:6379", "", []byte("secret"))
-	// store := cookie.NewStore([]byte("secret"))
 	if err != nil {
 		log.Fatal(fmt.Sprintf("failed to new redis session. error => %v", err))
 	}
@@ -29,15 +28,9 @@ func Run(c *dig.Container) {
 		employeeController controller.EmployeeContorollerIF,
 	) {
 		r.POST("/v1/auth/login/", authController.Login)
+		r.POST("/v1/auth/logout/", authController.Logout)
 		r.GET("/v1/employees/", employeeController.FineAll)
-		// r.GET("/v1/test/", func(ctx *gin.Context) {
-		// 	s := sessions.Default(ctx)
-		// 	fmt.Printf("get: %v¥n", s.Get("key"))
-		// 	s.Set("key", "testtesttest")
-		// 	if err := s.Save(); err != nil {
-		// 		println(err.Error())
-		// 	}
-		// })
+		r.POST("/v1/employees/", employeeController.Regist)
 	}); err != nil {
 		log.Fatal(fmt.Sprintf("error at dig invoke-> %s", err.Error()))
 	}

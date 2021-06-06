@@ -27,10 +27,10 @@
             active-class="deep-purple--text text--accent-4"
           >
             <v-list-item @click="toRegist">
-              <v-list-item-title>画像を登録する</v-list-item-title>
+              <v-list-item-title>従業員を登録する</v-list-item-title>
             </v-list-item>
             <v-list-item @click="toImages">
-              <v-list-item-title>画像の一覧を見る</v-list-item-title>
+              <v-list-item-title>従業員の一覧を見る</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
         </v-list>
@@ -63,19 +63,19 @@ export default {
   },
   methods: {
     toRegist: function () {
-      this.$router.push('registImage')
+      this.$router.push('/registImage')
     },
     toImages: function () {
-      this.$router.push('images')
+      this.$router.push('/images')
     },
     logout: async function () {
       try {
-        await axios.post('/v1/auth/logout/', {})
-        this.$router.push('images')
+        const instance = axios.create({})
+        await instance.post('/v1/auth/logout/', '{}')
+        this.$router.push('/')
       } catch (error) {
         console.log(error)
       }
-      this.$router.push('titlePage')
     }
   }
 }

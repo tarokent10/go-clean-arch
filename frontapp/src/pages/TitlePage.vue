@@ -56,13 +56,12 @@ export default {
   methods: {
     async login () {
       try {
-        await axios.post('/v1/auth/login/', {
+        const instance = axios.create({})
+        await instance.post('/v1/auth/login/', {
           userID: this.userid,
           password: this.password
-        }, {
-          withCredentials: true
         })
-        this.$router.push('images')
+        this.$router.push('/images')
       } catch (error) {
         if (error.response.status === 401) {
           window.alert('IDもしくはパスワードが不正です')

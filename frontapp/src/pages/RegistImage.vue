@@ -106,7 +106,7 @@ export default {
       //   },
       //   responseType: 'json'
       // })
-      axios.post('/v1/images/', {
+      axios.post('/v1/employee/', {
         name: this.name,
         data: this.imgUri,
         description: this.description

@@ -3,6 +3,7 @@ package usecase
 import (
 	"encoding/json"
 	"fmt"
+	"picture-go-app/domain/models"
 	"picture-go-app/domain/repository"
 	"picture-go-app/infrastructure/log"
 	"picture-go-app/infrastructure/session"
@@ -41,26 +42,39 @@ func (uc AuthUsecase) Login(ctx *gin.Context, userID, password string) error {
 		// password is not correct
 		return fmt.Errorf("uncorrect auth info")
 	}
-	logined(ctx)
+	writeSessionStore(ctx, m)
 	return nil
 }
-
-func logined(c *gin.Context) {
-	// TODO SetCoockeされない。ミドルウェアでレスポンスに書き込めない可能性がありそう
+func (uc AuthUsecase) Logout(ctx *gin.Context) error {
+	s := sessions.Default(ctx)
+	s.Clear()
+	s.Options(sessions.Options{
+		Path:     "/",
+		HttpOnly: true,
+		MaxAge:   -1, // delete session from store
+	})
+	if err := s.Save(); err != nil {
+		log.Err(fmt.Sprintf("failed to delete session. %v", err))
+	}
+	log.Debug("session deleted")
+	return nil
+}
+func writeSessionStore(c *gin.Context, m *models.User) {
 	s := sessions.Default(c)
-	data := &session.SessionData{ // TODO ユーザ情報が詰められない
-		Userid:   "test",
-		UserName: "test",
+	data := &session.SessionData{
+		Userid:   m.UserID,
+		UserName: m.Name,
 	}
 	sdata, err := json.Marshal(data)
 	if err != nil {
 		log.Err(fmt.Sprintf("failed to merchal session. %v", err))
 	}
-	println(string(sdata))
-	s.Set("skey", string(sdata))
-	s.Options(*&sessions.Options{
+	log.Debug(string(sdata))
+	s.Set(session.DataKey, string(sdata))
+	s.Options(sessions.Options{
+		Path:     "/",
 		HttpOnly: true,
-		MaxAge:   3600, //sec
+		MaxAge:   2000, //sec
 	})
 	if err = s.Save(); err != nil {
 		log.Err(fmt.Sprintf("failed to save session. %v", err))
