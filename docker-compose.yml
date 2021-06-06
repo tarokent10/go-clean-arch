@@ -36,9 +36,9 @@ services:
     command: bash -c "cd app && go run cmd/main.go"
 
 #  ui:
-#    build: ./picture-front
+#    build: ./frontapp
 #    container_name: ui
 #    ports: ["8080:8080"]
 #    volumes:
-#      - ./picture-front:/home/ui
+#      - ./frontapp:/home/ui
 #    command: "npm run serve"
