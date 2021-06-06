@@ -2,6 +2,7 @@ package session
 
 import (
 	"fmt"
+	"net/http"
 	"picture-go-app/infrastructure/log"
 
 	"github.com/gin-contrib/sessions"
@@ -30,7 +31,7 @@ func AuthRequired(c *gin.Context) {
 	log.Debug(fmt.Sprintf("get session data => %v", sessionDataJson))
 	// TODO 必要なら構造体化してコンテキストに詰める
 	if sessionDataJson != nil {
-		// TODO not login. abort
+		c.AbortWithStatus(http.StatusUnauthorized) // not login
 	}
 	c.Next()
 }
