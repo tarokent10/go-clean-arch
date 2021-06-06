@@ -1,19 +1,20 @@
 version: "3"
 services:
   db:
-    image: mysql@sha256:ca4a69d21836099c0aa2b4bb49ee32d2f1e2055576105ea2930206387a9e7291
+    build:
+      context: .
+      dockerfile: ./mysql/Dockerfile
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
     ports:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mydb 
+      MYSQL_DATABASE: mydb
       MYSQL_USER: test
       MYSQL_PASSWORD: test
       TZ: 'Asia/Tokyo'
     volumes:
       - ./mysql/data:/var/lib/mysql
-      # - ./mysql/sql:/docker-entrypoint-initdb.d
   redis:
     image: "redis:6.0.12"
     ports:

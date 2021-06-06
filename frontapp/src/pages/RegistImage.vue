@@ -50,8 +50,7 @@
               <v-textarea
                 v-model="remarks"
                 label="備考"
-                clearable
-                :rules="required">
+                clearable>
               </v-textarea>
             </v-col>
           </v-row>
@@ -64,7 +63,7 @@
           </v-row>
           <v-row class="mx-5">
             <v-col>
-              <v-btn block color="primary" @click="regist" :loading="loading">登録する
+              <v-btn block color="primary" @click="regist">登録する
               </v-btn>
             </v-col>
           </v-row>

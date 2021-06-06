@@ -1,6 +1,6 @@
 use mydb;
 
--- Employee(イメージデータ)
+-- Employee
 CREATE TABLE employee (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE employee (
     PRIMARY KEY (id)
 );
 
--- user（ユーザ）
+-- user
 CREATE TABLE user (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     user_id VARCHAR(20) NOT NULL,

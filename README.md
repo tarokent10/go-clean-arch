@@ -18,5 +18,6 @@ Golangでクリーンアーキテクチャを実装してみるためのサン�
 <p>in this directory</P>
 `$ make run`
 
-### url
+### アクセス
 <p>http://localhost:8080/</p>
+<p>ID/Password：test/1234</p>

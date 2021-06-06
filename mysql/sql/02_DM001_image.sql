@@ -1,5 +1,5 @@
-use picture;
--- ImageItem(イメージタグ)
+use mydb;
+-- user
 INSERT INTO user (
     user_id, name, password, created_at, updated_at
 ) VALUES (

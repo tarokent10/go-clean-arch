@@ -13,7 +13,7 @@ import (
 
 const (
 	Type     = "mysql"
-	RetryNum = 5
+	RetryNum = 10
 )
 
 type MySQLConnector struct {
