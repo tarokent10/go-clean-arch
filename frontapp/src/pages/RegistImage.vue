@@ -41,8 +41,7 @@
               <v-text-field
                 v-model="department"
                 label="部署"
-                clearable
-                :rules="required">
+                clearable>
               </v-text-field>
             </v-col>
           </v-row>
@@ -84,7 +83,6 @@ export default {
       remarks: '',
       department: '',
       imgUri: '',
-      loading: false,
       required: [
         v => !!v || 'required property'
       ]
@@ -106,18 +104,10 @@ export default {
     },
     regist: function () {
       const valid = this.$refs.form.validate()
-      if (!valid) {
+      if (!valid) {//チェックは最小限のみ
         return
       }
-      this.loading = true
-      // const as = axios.create({
-      //   baseURL: process.env.VUE_APP_API_HOST,
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   responseType: 'json'
-      // })
-      axios.post('/v1/employee/', {
+      axios.post('/v1/employee/', { 
         name: this.name,
         picture: this.imgUri,
         updateDateTime: '',
@@ -129,7 +119,6 @@ export default {
         .catch(function (error) {
           console.log(error)
         })
-      this.loading = false
     }
   }
 }
