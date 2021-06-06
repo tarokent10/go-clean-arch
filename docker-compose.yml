@@ -28,17 +28,15 @@ services:
       APP_DBHOST: db
       APP_DBPORT: 3306
     ports: 
-      - "8080:3000"
+      - "8081:3000"
     depends_on: ["db","redis"]
     volumes:
       - ./app:/home/app
     working_dir: /home
     command: bash -c "cd app && go run cmd/main.go"
-
-#  ui:
-#    build: ./frontapp
-#    container_name: ui
-#    ports: ["8080:8080"]
-#    volumes:
-#      - ./frontapp:/home/ui
-#    command: "npm run serve"
+  frontapp:
+    build: ./frontapp
+    ports: ["8080:8080"]
+    volumes:
+      - ./frontapp:/home/ui
+    command: "npm run serve"
