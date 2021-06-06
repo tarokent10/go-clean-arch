@@ -104,10 +104,10 @@ export default {
     },
     regist: function () {
       const valid = this.$refs.form.validate()
-      if (!valid) {//チェックは最小限のみ
+      if (!valid) {
         return
       }
-      axios.post('/v1/employee/', { 
+      axios.post('/v1/employee/', {
         name: this.name,
         picture: this.imgUri,
         updateDateTime: '',
