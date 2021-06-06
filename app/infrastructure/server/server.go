@@ -26,8 +26,10 @@ func Run(c *dig.Container) {
 	r.Use(session.AuthRequired)
 	if err := c.Invoke(func(
 		authController controller.AuthContorollerIF,
+		employeeController controller.EmployeeContorollerIF,
 	) {
 		r.POST("/v1/auth/login/", authController.Login)
+		r.GET("/v1/employees/", employeeController.FineAll)
 		// r.GET("/v1/test/", func(ctx *gin.Context) {
 		// 	s := sessions.Default(ctx)
 		// 	fmt.Printf("get: %v¥n", s.Get("key"))

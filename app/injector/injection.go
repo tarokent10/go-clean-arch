@@ -27,10 +27,13 @@ func InitDIContainer(conn connector.DBConnector) (*dig.Container, error) {
 		return conn
 	}), errors)
 	errors = appendIfExists(c.Provide(gateway.NewUserRepository), errors)
+	errors = appendIfExists(c.Provide(gateway.NewEmployeeRepository), errors)
 	// usecase
+	errors = appendIfExists(c.Provide(usecase.NewAuthUsecase), errors)
 	errors = appendIfExists(c.Provide(usecase.NewEmployeeUsecase), errors)
 	// contoroller
 	errors = appendIfExists(c.Provide(controller.NewAuthContoroller), errors)
+	errors = appendIfExists(c.Provide(controller.NewEmployeeContoroller), errors)
 
 	return c, mergeError(errors)
 }
