@@ -10,8 +10,7 @@
             <v-col class="text-center">
               <v-file-input
                 show-size
-                placeholder="Upload your favorite picture"
-                label="my picture"
+                label="アイコン"
                 @change="fileinput"
                 :rules="required"
               >
@@ -31,7 +30,17 @@
             <v-col>
               <v-text-field
                 v-model="name"
-                label="name"
+                label="名前"
+                clearable
+                :rules="required">
+              </v-text-field>
+            </v-col>
+          </v-row>
+          <v-row class="mx-5">
+            <v-col>
+              <v-text-field
+                v-model="department"
+                label="部署"
                 clearable
                 :rules="required">
               </v-text-field>
@@ -40,8 +49,9 @@
           <v-row class="mx-5">
             <v-col>
               <v-textarea
-                v-model="description"
-                label="description"
+                v-model="remarks"
+                label="備考"
+                clearable
                 :rules="required">
               </v-textarea>
             </v-col>
@@ -71,7 +81,8 @@ export default {
   data: function () {
     return {
       name: '',
-      description: '',
+      remarks: '',
+      department: '',
       imgUri: '',
       loading: false,
       required: [
@@ -108,12 +119,12 @@ export default {
       // })
       axios.post('/v1/employee/', {
         name: this.name,
-        data: this.imgUri,
-        description: this.description
-      }, {
-        withCredentials: true
+        picture: this.imgUri,
+        updateDateTime: '',
+        department: this.department,
+        remarks: this.remarks
       }).then(function (response) {
-        console.log('post sucessed')
+        window.alert('従業員情報を登録しました')
       })
         .catch(function (error) {
           console.log(error)

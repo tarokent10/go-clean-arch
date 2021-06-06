@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"picture-go-app/domain/models"
 	"picture-go-app/domain/repository"
+	"regexp"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -61,13 +62,15 @@ func (uc EmployeeUsecase) fromModel(m *models.Employee) *EmployeeContainer {
 	return c
 }
 func (uc EmployeeUsecase) toModel(c *EmployeeContainer) (*models.Employee, error) {
-	pictureByte, err := base64.StdEncoding.DecodeString(c.Picture)
+	expression := regexp.MustCompile("^data:.*;base64,")
+	pictureBase64 := expression.ReplaceAllString(c.Picture, "")
+	pictureBinary, err := base64.StdEncoding.DecodeString(pictureBase64)
 	if err != nil {
 		return nil, err
 	}
 	model := &models.Employee{
 		Name:           c.Name,
-		Picture:        pictureByte,
+		Picture:        pictureBinary,
 		UpdateDateTime: time.Now(),
 		Department:     c.Department,
 		Remarks:        c.Remarks,

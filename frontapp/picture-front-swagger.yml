@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Picture application APIs
+  title: Application APIs
   description: フロントエンドがアクセスするAPI群を定義する.
   version: 1.0.0
   license:
@@ -49,9 +49,9 @@ paths:
             example:
               - name: taro tanaka
                 picture: AGDKS+FOIEDFESAFEILDIE
-                updateDateTime: 2020/10/03 18:27:30
+                updateDateTime: "" # server set sysdate
                 department: development
-                remarks: ""
+                remarks: "super man"
       responses:
         '201':
           description: CREATED

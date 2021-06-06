@@ -30,7 +30,7 @@ func Run(c *dig.Container) {
 		r.POST("/v1/auth/login/", authController.Login)
 		r.POST("/v1/auth/logout/", authController.Logout)
 		r.GET("/v1/employees/", employeeController.FineAll)
-		r.POST("/v1/employees/", employeeController.Regist)
+		r.POST("/v1/employee/", employeeController.Regist)
 	}); err != nil {
 		log.Fatal(fmt.Sprintf("error at dig invoke-> %s", err.Error()))
 	}
