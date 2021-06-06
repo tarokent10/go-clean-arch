@@ -16,4 +16,7 @@ Golangでクリーンアーキテクチャを実装してみるためのサン�
 
 ## 起動
 <p>in this directory</P>
-`$ docker-compose up`
+`$ make run`
+
+### url
+<p>http://localhost:8080/</p>

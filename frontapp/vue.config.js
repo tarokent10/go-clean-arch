@@ -5,7 +5,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/v1': {
-        target: 'http://localhost:8080', 
+        target: 'http://go-app:3000', 
         changeOrigin: true
       }
     }

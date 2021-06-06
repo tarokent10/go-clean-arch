@@ -6,12 +6,14 @@ import (
 	"picture-go-app/adapter/gateway/connector"
 	"picture-go-app/infrastructure/config"
 	"picture-go-app/infrastructure/log"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
 const (
-	Type = "mysql"
+	Type     = "mysql"
+	RetryNum = 5
 )
 
 type MySQLConnector struct {
@@ -31,8 +33,18 @@ func Open() (connector.DBConnector, error) {
 	if err != nil {
 		return nil, err
 	}
-	if err := db.Ping(); err != nil {
-		return nil, err
+	// データベース起動を少し待つ
+	for i := 0; ; {
+		if err := db.Ping(); err != nil {
+			i++
+			log.Debug(fmt.Sprintf("failed to connect database. retrynum=%d", i))
+			if i >= RetryNum {
+				return nil, err
+			}
+			time.Sleep(time.Second * 1)
+		} else {
+			break
+		}
 	}
 	return &MySQLConnector{db: db}, nil
 }
